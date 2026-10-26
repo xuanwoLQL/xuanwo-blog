@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="bg" cx="28%" cy="20%" r="90%">
+      <stop offset="0" stop-color="#173d37"/>
+      <stop offset="1" stop-color="#07110f"/>
+    </radialGradient>
+    <linearGradient id="swirl" x1="12" y1="12" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5eead4"/>
+      <stop offset="1" stop-color="#e8c547"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="31" fill="url(#bg)"/>
+  <path d="M48 24c-5-10-19-13-28-5S13 42 26 47c12 4 22-8 16-18-5-8-17-8-21 1-3 7 3 13 9 11 5-1 7-8 3-11-3-2-7 0-7 4"
+        fill="none" stroke="url(#swirl)" stroke-width="4" stroke-linecap="round"/>
+</svg>
+

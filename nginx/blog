@@ -1,0 +1,155 @@
+# /etc/nginx/sites-available/blog
+# This file is included from the http{} context on Ubuntu/Debian.
+
+limit_req_zone $binary_remote_addr zone=blog_req:10m rate=16r/s;
+limit_conn_zone $binary_remote_addr zone=blog_conn:10m;
+limit_req_status 429;
+limit_conn_status 429;
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    # Replace "_" with your domain after DNS and ICP filing are ready.
+    server_name _;
+
+    root /var/www/blog;
+    index index.html;
+    charset utf-8;
+    server_tokens off;
+
+    access_log /var/log/nginx/blog.access.log;
+    error_log  /var/log/nginx/blog.error.log warn;
+
+    # Static site only: small request bodies and short timeouts.
+    client_max_body_size 1m;
+    client_body_timeout 10s;
+    client_header_timeout 10s;
+    keepalive_timeout 30s;
+
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    etag on;
+
+    open_file_cache max=2000 inactive=30s;
+    open_file_cache_valid 60s;
+    open_file_cache_min_uses 2;
+    open_file_cache_errors on;
+
+    # Basic anti-scan throttling. Burst is generous enough for normal page loads.
+    limit_req zone=blog_req burst=32 nodelay;
+    limit_conn blog_conn 24;
+
+    gzip on;
+    gzip_vary on;
+    gzip_comp_level 6;
+    gzip_min_length 1024;
+    gzip_proxied any;
+    gzip_types
+        text/plain
+        text/css
+        text/xml
+        application/json
+        application/javascript
+        application/xml
+        application/rss+xml
+        image/svg+xml;
+
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "DENY" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()" always;
+    add_header Cross-Origin-Opener-Policy "same-origin" always;
+    add_header Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self';" always;
+
+    error_page 404 /404.html;
+
+    # Allow Certbot webroot challenges while keeping other dotfiles private.
+    location ^~ /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+        default_type text/plain;
+        try_files $uri =404;
+    }
+
+    # Deny .git, .env, .svn, editor state and all other hidden paths.
+    location ~ /\.(?!well-known(?:/|$)) {
+        access_log off;
+        log_not_found off;
+        return 404;
+    }
+
+    # Deny backups, archives, databases, dumps, source maps and editor leftovers.
+    location ~* \.(?:bak|backup|old|orig|copy|save|swp|swo|tmp|sql|sqlite|sqlite3|db|dump|zip|rar|7z|tar|tgz|gz|bz2|xz|map)$ {
+        access_log off;
+        log_not_found off;
+        return 404;
+    }
+
+    # Reduce noise from scanners looking for software not used by this site.
+    location ~* ^/(?:wp-admin|wp-login\.php|xmlrpc\.php|phpmyadmin|pma|admin|manager|login)(?:/|$) {
+        access_log off;
+        log_not_found off;
+        return 404;
+    }
+
+    # Fingerprinted CSS/JS/font assets can be cached for a long time.
+    location ~* \.(?:css|js|mjs|woff2?|ttf|otf|eot)$ {
+        try_files $uri =404;
+        expires 1y;
+        access_log off;
+    }
+
+    # Images and icons are cached for a shorter period so replacements are seen.
+    location ~* \.(?:svg|png|jpe?g|gif|webp|avif|ico)$ {
+        try_files $uri =404;
+        expires 30d;
+        access_log off;
+    }
+
+    # Search data and HTML should revalidate quickly after each deployment.
+    location = /index.json {
+        try_files $uri =404;
+        expires -1;
+    }
+
+    location = /index.html {
+        try_files $uri =404;
+        expires -1;
+    }
+
+    location = /index.xml {
+        try_files $uri =404;
+        expires 1h;
+    }
+
+    location = /sitemap.xml {
+        try_files $uri =404;
+        expires 1h;
+    }
+
+    location = /robots.txt {
+        try_files $uri =404;
+        expires 1h;
+    }
+
+    location = /404.html {
+        internal;
+        expires -1;
+    }
+
+    location / {
+        try_files $uri $uri/ $uri/index.html =404;
+        expires -1;
+        limit_except GET HEAD {
+            deny all;
+        }
+    }
+}
+
+# After the domain and ICP filing are ready:
+#   sudo apt install certbot python3-certbot-nginx
+#   sudo certbot --nginx -d blog.example.com
+# Certbot will add the TLS server block and HTTP-to-HTTPS redirect.
+# Only enable HSTS after HTTPS has worked reliably for a period of time.
+

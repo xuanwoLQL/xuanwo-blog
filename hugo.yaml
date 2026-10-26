@@ -1,0 +1,196 @@
+# 漩涡 / xuanwo
+# 临时使用服务器 IP；绑定域名后请同步修改 baseURL。
+baseURL: "http://47.93.123.112/"
+title: "漩涡"
+copyright: "© 2026 xuanwo · 记录代码、安全与思考"
+theme: ["PaperMod"]
+
+locale: "zh-CN"
+defaultContentLanguage: "zh"
+defaultContentLanguageInSubdir: false
+hasCJKLanguage: true
+timeZone: "Asia/Shanghai"
+
+enableRobotsTXT: true
+enableEmoji: true
+enableInlineShortcodes: false
+enableGitInfo: false
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+summaryLength: 80
+
+pagination:
+  disableAliases: false
+  pagerSize: 8
+
+# PaperMod 搜索页依赖首页 JSON 索引。
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+  section:
+    - HTML
+    - RSS
+  taxonomy:
+    - HTML
+    - RSS
+  term:
+    - HTML
+    - RSS
+  page:
+    - HTML
+
+taxonomies:
+  category: categories
+  tag: tags
+  series: series
+
+permalinks:
+  posts: "/posts/:year/:month/:slug/"
+
+menu:
+  main:
+    - identifier: home
+      name: 首页
+      url: /
+      weight: 10
+    - identifier: archives
+      name: 归档
+      url: /archives/
+      weight: 20
+    - identifier: tags
+      name: 标签
+      url: /tags/
+      weight: 30
+    - identifier: search
+      name: 搜索
+      url: /search/
+      weight: 40
+    - identifier: about
+      name: 关于
+      url: /about/
+      weight: 50
+
+params:
+  env: production
+  description: "漩涡是 xuanwo 的个人博客，记录 CTF Writeups、漏洞复现、网络安全学习与技术折腾。"
+  author: "xuanwo"
+  keywords:
+    - 网络安全
+    - CTF
+    - Writeup
+    - 漏洞复现
+    - 技术博客
+    - xuanwo
+  images:
+    - images/og-cover.png
+
+  mainSections:
+    - posts
+
+  # 默认深色主题，同时保留右上角明暗切换。
+  defaultTheme: dark
+  disableThemeToggle: false
+
+  ShowReadingTime: true
+  ShowWordCount: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowRssButtonInSectionTermList: true
+  ShowAllPagesInArchive: true
+  ShowPageNums: true
+  ShowToc: true
+  TocOpen: false
+  ShowLastmod: true
+  ShowFullTextinRSS: true
+  DateFormat: "2006-01-02"
+  hideAuthor: false
+  hideFooter: false
+  comments: false
+
+  # PaperMod Profile Mode：首页头像、简介、社交图标和按钮。
+  profileMode:
+    enabled: true
+    title: "漩涡 · xuanwo"
+    subtitle: "网络安全学生，记录 CTF Writeups、漏洞复现与技术折腾。以授权为前提，保持好奇，认真复盘。"
+    imageUrl: "images/profile.png"
+    imageWidth: 180
+    imageHeight: 180
+    imageTitle: "xuanwo 的占位头像"
+    buttons:
+      - name: 阅读文章
+        url: posts/
+      - name: 关于我
+        url: about/
+
+  socialIcons:
+    - name: github
+      title: GitHub
+      url: "https://github.com/xuanwoLQL"
+    - name: email
+      title: 邮箱
+      url: "mailto:15060801795@163.com"
+    - name: rss
+      title: RSS 订阅
+      url: "index.xml"
+
+  label:
+    text: "漩涡"
+    icon: "/favicon.svg"
+    iconHeight: 28
+
+  assets:
+    disableHLJS: true
+    favicon: "/favicon.svg"
+    favicon16x16: "/favicon-16x16.png"
+    favicon32x32: "/favicon-32x32.png"
+    apple_touch_icon: "/apple-touch-icon.png"
+    safari_pinned_tab: "/safari-pinned-tab.svg"
+    theme_color: "#0b1211"
+    msapplication_TileColor: "#0b1211"
+
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.35
+    minMatchCharLength: 1
+    keys:
+      - title
+      - permalink
+      - summary
+      - content
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: false
+    extensions:
+      definitionList: true
+      footnote: true
+      linkify: true
+      strikethrough: true
+      table: true
+      taskList: true
+      typographer: true
+  highlight:
+    noClasses: false
+    codeFences: true
+    guessSyntax: true
+    lineNos: false
+    style: "github-dark"
+  tableOfContents:
+    startLevel: 2
+    endLevel: 3
+    ordered: false
+
+sitemap:
+  changefreq: weekly
+  priority: 0.5
+  filename: sitemap.xml
+
