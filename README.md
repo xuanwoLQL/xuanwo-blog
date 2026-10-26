@@ -4,6 +4,13 @@
 
 源码仓库：<https://github.com/xuanwoLQL/xuanwo-blog>
 
+## 当前线上状态
+
+- 博客地址：<http://47.93.123.112/>
+- 服务器：阿里云 Ubuntu 24.04，Nginx 1.24
+- GitHub：<https://github.com/xuanwoLQL/xuanwo-blog>
+- HTTPS：等待域名和 ICP 备案完成后配置
+
 项目内置的 PaperMod 来自 `master` 快照，提交：
 
 ```text
