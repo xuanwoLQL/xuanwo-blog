@@ -1,0 +1,26 @@
+{{- $bootstrap := resources.Get "js/bootstrap.js" | minify | fingerprint -}}
+<script src="{{ $bootstrap.RelPermalink }}" integrity="{{ $bootstrap.Data.Integrity }}"></script>
+<meta name="theme-color" content="#090c0b">
+<meta name="color-scheme" content="dark light">
+<noscript>
+    <style>
+        @media (max-width: 760px) {
+            .site-nav {
+                position: static;
+                left: auto;
+                right: auto;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: 0;
+                background: transparent;
+                padding: 0;
+            }
+            .menu-toggle { display: none; }
+        }
+    </style>
+</noscript>

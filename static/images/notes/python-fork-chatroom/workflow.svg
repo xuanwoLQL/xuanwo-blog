@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="python-fork-chatroom-title python-fork-chatroom-desc" id="python-fork-chatroom-root">
+      <title id="python-fork-chatroom-title">fork 群聊进程模型</title>
+      <desc id="python-fork-chatroom-desc">监听进程接受连接，子进程处理单个客户端，结果再广播给其他连接。</desc>
+      
+<rect width="960" height="600" fill="#f6f2e9"/>
+
+<defs>
+      <style>#python-fork-chatroom-root { color: #0c211c; font-family: 'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif; }
+      #python-fork-chatroom-root .diagram-container { width: 100%; overflow-x: auto; }</style>
+  <marker id="python-fork-chatroom-python-fork-chatroom-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#5b726a"/>
+  </marker>
+  <marker id="python-fork-chatroom-python-fork-chatroom-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#0f766e"/>
+  </marker>
+  <marker id="python-fork-chatroom-python-fork-chatroom-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#0369a1"/>
+  </marker>
+</defs>
+<text x="40" y="38" fill="#5b726a" font-size="8" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.16em">ARCHITECTURE</text>
+<text x="40" y="70" fill="#0c211c" font-size="26" font-family="'Noto Serif SC','Source Han Serif SC','Songti SC','SimSun',serif" text-anchor="start" font-weight="400">fork 群聊进程模型</text>
+<text x="40" y="94" fill="#5b726a" font-size="10" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">监听进程接受连接，子进程处理单个客户端，结果再广播给其他连接。</text>
+<line x1="40" y1="112" x2="920" y2="112" stroke="#0c211c" stroke-width="0.8" stroke-opacity="0.14"/>
+      <rect x="40" y="150" width="260" height="330" rx="8" fill="#0c211c" stroke="#0c211c" stroke-width="0.8" fill-opacity="0.025" stroke-opacity="0.14"/><rect x="52" y="154" width="72" height="14" rx="2" fill="#f6f2e9"/><text x="88" y="164" fill="#5f736b" font-size="7.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.12em">CLIENTS</text><rect x="350" y="150" width="260" height="330" rx="8" fill="#0c211c" stroke="#0c211c" stroke-width="0.8" fill-opacity="0.025" stroke-opacity="0.14"/><rect x="362" y="154" width="72" height="14" rx="2" fill="#f6f2e9"/><text x="398" y="164" fill="#5f736b" font-size="7.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.12em">SERVER</text><rect x="660" y="150" width="260" height="330" rx="8" fill="#0c211c" stroke="#0c211c" stroke-width="0.8" fill-opacity="0.025" stroke-opacity="0.14"/><rect x="672" y="154" width="72" height="14" rx="2" fill="#f6f2e9"/><text x="708" y="164" fill="#5f736b" font-size="7.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.12em">OUTPUT</text>
+      <path d="M 273,286 H 376" fill="none" stroke="#0369a1" stroke-width="1.15" marker-end="url(#python-fork-chatroom-python-fork-chatroom-arrow-link)"/><path d="M 583,286 H 686" fill="none" stroke="#0f766e" stroke-width="1.15" marker-end="url(#python-fork-chatroom-python-fork-chatroom-arrow-accent)"/>
+      <rect x="70" y="250" width="200" height="72" rx="7" fill="#fffdf8" stroke="#0c211c" stroke-width="1" stroke-opacity="0.28"/><rect x="78" y="257" width="42" height="12" rx="2" fill="none" stroke="#0c211c" stroke-width="0.8" stroke-opacity="0.28"/><text x="99" y="266" fill="#0c211c" font-size="6.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.06em" fill-opacity="0.28">SOCKET</text><text x="170" y="290" fill="#0c211c" font-size="12.5" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">多个客户端</text><text x="170" y="306" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">连接 + 发送消息</text><rect x="380" y="250" width="200" height="72" rx="7" fill="#0f766e" stroke="#0f766e" stroke-width="1" fill-opacity="0.08"/><rect x="388" y="257" width="38" height="12" rx="2" fill="none" stroke="#0f766e" stroke-width="0.8"/><text x="407" y="266" fill="#0f766e" font-size="6.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.06em">FORK</text><text x="480" y="290" fill="#0c211c" font-size="12.5" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">父进程 accept → fork</text><text x="480" y="306" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">子进程 recv / send</text><rect x="690" y="250" width="200" height="72" rx="7" fill="#fffdf8" stroke="#0c211c" stroke-width="1" stroke-opacity="0.28"/><rect x="698" y="257" width="63" height="12" rx="2" fill="none" stroke="#0c211c" stroke-width="0.8" stroke-opacity="0.28"/><text x="729.5" y="266" fill="#0c211c" font-size="6.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.06em" fill-opacity="0.28">BROADCAST</text><text x="790" y="290" fill="#0c211c" font-size="12.5" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">消息广播</text><text x="790" y="306" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">向其他客户端写回</text>
+      
+<line x1="40" y1="532" x2="920" y2="532" stroke="#0c211c" stroke-width="0.8" stroke-opacity="0.14"/>
+<text x="40" y="548" fill="#5b726a" font-size="8" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.16em">LEGEND</text>
+<rect x="122" y="538" width="28" height="12" rx="2" fill="#fffdf8" stroke="#0c211c" stroke-width="0.8" stroke-opacity="0.28"/>
+<text x="158" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">组件</text>
+<rect x="278" y="538" width="28" height="12" rx="2" fill="#0f766e" stroke="#0f766e" stroke-width="0.8" fill-opacity="0.08"/>
+<text x="314" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">关键节点</text>
+<line x1="438" y1="544" x2="476" y2="544" stroke="#5b726a" stroke-width="1.2" marker-end="url(#python-fork-chatroom-python-fork-chatroom-arrow)"/>
+<text x="488" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">调用 / 数据流</text>
+    </svg>

@@ -12,6 +12,38 @@ $ErrorActionPreference = "Stop"
 $ProjectRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 Set-Location $ProjectRoot
 
+$Config = @{}
+$ConfigFile = Join-Path $ProjectRoot ".deploy.env"
+if (Test-Path -LiteralPath $ConfigFile) {
+    foreach ($line in Get-Content -LiteralPath $ConfigFile -Encoding utf8) {
+        $trimmed = $line.Trim()
+        if (-not $trimmed -or $trimmed.StartsWith("#")) { continue }
+        if ($trimmed -match '^([A-Za-z_][A-Za-z0-9_]*)=(.*)$') {
+            $value = $matches[2].Trim().Trim('"').Trim("'")
+            $Config[$matches[1]] = $value
+        }
+    }
+}
+
+if (-not $PSBoundParameters.ContainsKey("BaseUrl") -and -not $env:BASE_URL -and $Config.ContainsKey("BASE_URL")) {
+    $BaseUrl = $Config["BASE_URL"]
+}
+if (-not $PSBoundParameters.ContainsKey("DeployUser") -and -not $env:DEPLOY_USER -and $Config.ContainsKey("DEPLOY_USER")) {
+    $DeployUser = $Config["DEPLOY_USER"]
+}
+if (-not $PSBoundParameters.ContainsKey("DeployHost") -and -not $env:DEPLOY_HOST -and $Config.ContainsKey("DEPLOY_HOST")) {
+    $DeployHost = $Config["DEPLOY_HOST"]
+}
+if (-not $PSBoundParameters.ContainsKey("DeployPath") -and -not $env:DEPLOY_PATH -and $Config.ContainsKey("DEPLOY_PATH")) {
+    $DeployPath = $Config["DEPLOY_PATH"]
+}
+if (-not $PSBoundParameters.ContainsKey("SshKey") -and -not $env:SSH_KEY -and $Config.ContainsKey("SSH_KEY")) {
+    $SshKey = $Config["SSH_KEY"]
+}
+if (-not $PSBoundParameters.ContainsKey("SshPort") -and -not $env:SSH_PORT -and $Config.ContainsKey("SSH_PORT")) {
+    $SshPort = [int]$Config["SSH_PORT"]
+}
+
 if ($DeployPath -notmatch '^/var/www/[A-Za-z0-9._/-]+$') {
     throw "DeployPath must be a simple absolute path below /var/www"
 }
@@ -20,10 +52,19 @@ if (-not (Test-Path -LiteralPath "themes/PaperMod")) {
     throw "themes/PaperMod is missing"
 }
 
+if ($DeployUser -eq "root") {
+    Write-Warning "Deploying as root. Prefer a dedicated low-privilege account via DEPLOY_USER."
+}
+
 $Hugo = if ($env:HUGO_BIN) {
     $env:HUGO_BIN
 } else {
     (Get-Command hugo -ErrorAction Stop).Source
+}
+$Python = if ($env:PYTHON_BIN) {
+    $env:PYTHON_BIN
+} else {
+    (Get-Command python -ErrorAction Stop).Source
 }
 
 $OpenSsh = Join-Path $env:SystemRoot "System32\OpenSSH"
@@ -44,6 +85,14 @@ if (-not (Test-Path -LiteralPath "public/index.html")) {
     throw "public/index.html was not generated"
 }
 
+Write-Host "[blog] Checking internal links"
+& $Python "scripts/check_links.py"
+if ($LASTEXITCODE -ne 0) { throw "Internal link check failed" }
+
+Write-Host "[blog] Checking release quality"
+& $Python "scripts/quality_check.py"
+if ($LASTEXITCODE -ne 0) { throw "Release quality check failed" }
+
 $SshArgs = @("-o", "StrictHostKeyChecking=accept-new")
 $ScpArgs = @("-o", "StrictHostKeyChecking=accept-new")
 if ($SshKey) {
@@ -56,11 +105,12 @@ if ($SshPort -ne 22) {
 }
 
 $Remote = "$DeployUser@$DeployHost"
-Write-Host "[blog] Preparing remote directory $Remote`:$DeployPath"
-& $Ssh @SshArgs $Remote "mkdir -p -- '$DeployPath'"
-if ($LASTEXITCODE -ne 0) { throw "Remote mkdir failed" }
-
-$ArchiveName = "xuanwo-blog-$([guid]::NewGuid().ToString('N')).tar.gz"
+$Stamp = Get-Date -Format "yyyyMMdd-HHmmss"
+$ReleaseId = "$Stamp-$([guid]::NewGuid().ToString('N').Substring(0, 8))"
+$ReleasePath = "/var/www/blog-release-$ReleaseId"
+$BackupPath = "/var/www/blog-old-$ReleaseId"
+$FailedPath = "/var/www/blog-failed-$ReleaseId"
+$ArchiveName = "xuanwo-blog-$ReleaseId.tar.gz"
 $Archive = Join-Path $env:TEMP $ArchiveName
 
 try {
@@ -72,19 +122,50 @@ try {
     & $Scp @ScpArgs $Archive "${Remote}:/tmp/$ArchiveName"
     if ($LASTEXITCODE -ne 0) { throw "scp upload failed" }
 
-    Write-Host "[blog] Extracting release and fixing permissions"
-    $RemoteCommand = "tar -xzf '/tmp/$ArchiveName' -C '$DeployPath' && " +
-        "find '$DeployPath' -type d -exec chmod 755 {} + && " +
-        "find '$DeployPath' -type f -exec chmod 644 {} + && " +
-        "test -f '$DeployPath/index.html' && rm -f '/tmp/$ArchiveName'"
-    & $Ssh @SshArgs $Remote $RemoteCommand
-    if ($LASTEXITCODE -ne 0) { throw "Remote extraction failed" }
+    Write-Host "[blog] Preparing atomic release at $ReleasePath"
+    $RemoteScript = "set -eu`n" +
+        "archive='/tmp/$ArchiveName'`n" +
+        "release='$ReleasePath'`n" +
+        "deploy='$DeployPath'`n" +
+        "backup='$BackupPath'`n" +
+        "mkdir -p -- `"`$release`"`n" +
+        "tar -xzf `"`$archive`" -C `"`$release`"`n" +
+        "find `"`$release`" -type d -exec chmod 755 {} +`n" +
+        "find `"`$release`" -type f -exec chmod 644 {} +`n" +
+        "test -f `"`$release/index.html`"`n" +
+        "if [ -e `"`$deploy`" ]; then mv -- `"`$deploy`" `"`$backup`"; fi`n" +
+        "if ! mv -- `"`$release`" `"`$deploy`"; then`n" +
+        "  if [ -e `"`$backup`" ] && [ ! -e `"`$deploy`" ]; then mv -- `"`$backup`" `"`$deploy`"; fi`n" +
+        "  exit 1`n" +
+        "fi`n" +
+        "rm -f -- `"`$archive`"`n" +
+        "printf '%s\n' `"`$backup`""
+
+    & $Ssh @SshArgs $Remote $RemoteScript
+    if ($LASTEXITCODE -ne 0) { throw "Remote release swap failed" }
+
+    Write-Host "[blog] Verifying live site"
+    $response = Invoke-WebRequest -Uri $BaseUrl -UseBasicParsing -TimeoutSec 20
+    if ($response.StatusCode -ne 200) {
+        throw "Live site returned HTTP $($response.StatusCode)"
+    }
+    if ($response.Content -notmatch 'class=stat-num[^>]*data-count="?[1-9][0-9]*"?[^>]*>[1-9][0-9]*<') {
+        throw "Live homepage does not contain rendered non-zero counters"
+    }
 
     Write-Host "[blog] Deployment finished: $BaseUrl"
+    Write-Host "[blog] Rollback directory: $BackupPath"
+}
+catch {
+    Write-Warning "Deployment verification failed; attempting rollback"
+    $RollbackScript = "if [ -d '$BackupPath' ]; then " +
+        "if [ -e '$DeployPath' ]; then mv -- '$DeployPath' '$FailedPath'; fi; " +
+        "mv -- '$BackupPath' '$DeployPath'; fi"
+    & $Ssh @SshArgs $Remote $RollbackScript
+    throw
 }
 finally {
     if ([System.IO.File]::Exists($Archive)) {
         [System.IO.File]::Delete($Archive)
     }
 }
-

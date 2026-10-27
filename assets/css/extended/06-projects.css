@@ -1,0 +1,229 @@
+/* ==========================================================================
+   漩涡 · project detail
+   ========================================================================== */
+
+.project-single {
+    width: min(var(--wrap), calc(100% - 48px));
+    margin: 0 auto;
+    padding: calc(var(--header-h) + 34px) 0 80px;
+}
+
+.project-hero {
+    position: relative;
+    margin-bottom: 34px;
+    padding: clamp(28px, 4vw, 48px);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(145deg, var(--surface), var(--surface-2));
+}
+
+.project-hero-glow {
+    position: absolute;
+    top: -180px;
+    right: -100px;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--card-accent, var(--accent)), transparent 66%);
+    opacity: 0.14;
+    filter: blur(36px);
+    pointer-events: none;
+}
+
+.project-hero-main {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
+    gap: 34px;
+    align-items: center;
+}
+
+.project-kicker {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.project-lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--muted);
+}
+
+.project-lang i {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--dot, var(--accent));
+    box-shadow: 0 0 10px var(--dot, var(--accent));
+}
+
+.project-hero h1 {
+    margin: 0 0 14px;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    line-height: 1.06;
+    letter-spacing: -0.055em;
+    text-wrap: balance;
+}
+
+.project-hero .article-desc {
+    max-width: 40em;
+    margin-bottom: 20px;
+}
+
+.project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.project-hero-visual {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 250px;
+}
+
+.project-hero-mark {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-display);
+    font-size: clamp(7rem, 13vw, 11rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--card-accent, var(--accent));
+    opacity: 0.16;
+    user-select: none;
+}
+
+.project-orbit {
+    position: absolute;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+}
+
+.orbit-1 {
+    inset: 6%;
+    border-style: dashed;
+    animation: spin 34s linear infinite;
+}
+
+.orbit-2 {
+    inset: 22%;
+    animation: spin 22s linear infinite reverse;
+    border-color: var(--line-strong);
+}
+
+.project-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 42px;
+    align-items: start;
+}
+
+.project-body {
+    min-width: 0;
+    font-size: 16.5px;
+}
+
+.project-side {
+    position: sticky;
+    top: calc(var(--header-h) + 28px);
+}
+
+.project-side-card {
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+}
+
+.project-side-card h2 {
+    margin: 0 0 8px;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--faint);
+}
+
+.project-side-card dl {
+    margin: 0;
+    padding: 0;
+}
+
+.project-side-card dl > div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.project-side-card dl > div:last-child {
+    border-bottom: 0;
+}
+
+.project-side-card dt {
+    flex: none;
+    font-size: 11.5px;
+    color: var(--faint);
+}
+
+.project-side-card dd {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    font-size: 12px;
+    text-align: right;
+    color: var(--ink-soft);
+}
+
+.project-side-card dd i {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--dot, var(--accent));
+}
+
+.project-side-card dd a {
+    color: var(--accent);
+}
+
+.project-side-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+}
+
+.project-side-tags span {
+    padding: 4px 8px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--muted);
+    background: var(--surface-2);
+}
+
+.project-single .related {
+    margin-top: 52px;
+}
+
+.project-single .related-grid {
+    grid-template-columns: repeat(3, 1fr);
+}

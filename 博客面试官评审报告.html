@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>漩涡博客 · 面试官视角评审报告</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%230a0e0d'/%3E%3Cpath d='M16 6c-7 0-12 4-13 10h4c1-3 4-5 9-5s8 2 9 5h4c-1-6-6-10-13-10z' fill='%232dd4a7'/%3E%3Ccircle cx='16' cy='21' r='3' fill='%23f0b429'/%3E%3C/svg%3E">
+<style>
+/* ===== 基础与 token ===== */
+:root{
+  --bg:#0a0e0d;
+  --surface:#101614;
+  --surface2:#151d1a;
+  --line:rgba(140,190,170,.16);
+  --text:#d9e3dd;
+  --muted:#8fa39a;
+  --teal:#2dd4a7;
+  --amber:#f0b429;
+  --rose:#f0607a;
+  --blue:#5aa7ff;
+  --mono:"Cascadia Code","JetBrains Mono",Consolas,"Courier New",monospace;
+  --sans:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--sans);font-size:15px;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+section{padding:48px 0;border-top:1px solid var(--line)}
+.kicker{font-family:var(--mono);font-size:12px;color:var(--teal);letter-spacing:.14em;margin-bottom:8px}
+h1{font-size:clamp(26px,4.6vw,40px);line-height:1.25;font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(20px,3.2vw,26px);font-weight:700;margin:10px 0 6px}
+h3{font-size:16px;font-weight:700;margin:0 0 6px}
+p{margin:8px 0}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono)}
+code{
+  font-family:var(--mono);font-size:.86em;
+  background:rgba(45,212,167,.1);color:#7ce9c9;
+  padding:1px 5px;border-radius:4px;word-break:break-all;
+}
+pre{
+  font-family:var(--mono);font-size:12.5px;line-height:1.6;
+  background:#0c1210;border:1px solid var(--line);border-left:3px solid var(--teal);
+  padding:12px 14px;border-radius:6px;overflow-x:auto;margin:10px 0;
+  white-space:pre-wrap;word-break:break-word;
+}
+pre code{background:none;padding:0;color:#c9d8d1}
+/* ===== 头部 ===== */
+header{padding:56px 0 40px;background:
+  radial-gradient(900px 300px at 85% -10%, rgba(45,212,167,.12), transparent 60%),
+  radial-gradient(700px 260px at 10% -20%, rgba(240,180,41,.08), transparent 60%)}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:18px;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.meta-row b{color:var(--teal);font-weight:600}
+.badge{display:inline-block;font-family:var(--mono);font-size:11.5px;padding:2px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);margin-right:6px}
+.badge.good{color:var(--teal);border-color:rgba(45,212,167,.4)}
+.verdict{
+  margin-top:22px;background:linear-gradient(180deg,var(--surface2),var(--surface));
+  border:1px solid var(--line);border-radius:10px;padding:18px 20px;
+}
+.verdict b{color:var(--amber)}
+/* ===== 雷达图 ===== */
+.radar-box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 10px 6px;margin-top:18px}
+#radar{width:100%;height:380px}
+.caption{font-size:12.5px;color:var(--muted);margin:8px 4px 0;line-height:1.7}
+/* ===== 亮点 ===== */
+.grid2{display:grid;grid-template-columns:1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:1fr;gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.card h3{display:flex;align-items:baseline;gap:8px}
+.card .num{font-family:var(--mono);color:var(--teal);font-size:13px}
+.card ul{padding-left:0;list-style:none}
+.card li{padding-left:18px;position:relative;margin:6px 0}
+.card li::before{content:"";position:absolute;left:0;top:.72em;width:6px;height:6px;border-radius:50%;background:var(--teal)}
+/* ===== 优先级标签 ===== */
+.prio{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;padding:2px 9px;border-radius:4px;letter-spacing:.06em;vertical-align:2px;margin-right:6px}
+.p0{background:rgba(240,96,122,.15);color:var(--rose);border:1px solid rgba(240,96,122,.4)}
+.p1{background:rgba(240,180,41,.12);color:var(--amber);border:1px solid rgba(240,180,41,.4)}
+.p2{background:rgba(90,167,255,.12);color:var(--blue);border:1px solid rgba(90,167,255,.4)}
+/* ===== P0 卡片 ===== */
+.fix{background:#0c1210;border:1px dashed rgba(45,212,167,.4);border-radius:8px;padding:12px 14px;margin-top:10px}
+.fix b{color:var(--teal);font-size:13px;font-family:var(--mono);letter-spacing:.04em}
+/* ===== 表格 ===== */
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;table-layout:fixed}
+th{background:var(--surface2);color:var(--teal);font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-align:left}
+th,td{border:1px solid var(--line);padding:9px 10px;vertical-align:top;word-break:break-word}
+tr:nth-child(even) td{background:rgba(140,190,170,.03)}
+td:first-child{font-family:var(--mono);font-size:12.5px}
+.col-w-30{width:30%}.col-w-40{width:40%}.col-w-20{width:20%}
+/* ===== 对比块 ===== */
+.duo{display:grid;grid-template-columns:1fr;gap:12px}
+.duo .card{border-left:3px solid var(--teal)}
+.duo .card.warn{border-left-color:var(--rose)}
+.duo .card.warn h3{color:var(--rose)}
+/* ===== 时间轴 ===== */
+.timeline{margin-top:20px;border-top:1px solid var(--line)}
+.tl-row{display:grid;grid-template-columns:76px 28px 1fr;gap:0}
+.tl-row+.tl-row{border-top:1px solid var(--line)}
+.tl-time{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding:16px 10px 16px 0;text-align:right;line-height:1.6}
+.tl-axis{position:relative;display:flex;justify-content:center}
+.tl-axis::before{content:"";position:absolute;top:0;bottom:0;width:2px;background:var(--line)}
+.tl-dot{width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--teal);align-self:center;z-index:1}
+.tl-body{padding:16px 0 16px 12px}
+.tl-body h3{font-size:15px}
+.tl-body p{font-size:13.5px;color:var(--muted);margin:4px 0 0}
+/* ===== 页脚 ===== */
+footer{padding:36px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+footer .scope{margin-top:10px;line-height:1.8}
+@media (min-width:768px){
+  .grid2{grid-template-columns:1fr 1fr}
+  .grid3{grid-template-columns:1fr 1fr 1fr}
+  .duo{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 头部 ===== -->
+<header>
+  <div class="wrap">
+    <div class="kicker">INTERVIEWER REVIEW / 2026-10-27</div>
+    <h1>漩涡博客 · 面试官视角评审报告</h1>
+    <p class="muted">以面试官视角对个人安全博客做全面体检：工程化、前端、内容、安全合规、SEO 与可维护性六个维度，全部基于线上实测与源码通读。</p>
+    <div class="meta-row">
+      <span>被评对象 <b>http://47.93.123.112/</b></span>
+      <span>技术栈 <b>Hugo + PaperMod + Nginx</b></span>
+      <span>内容量 <b>59 篇笔记 · 17 个项目</b></span>
+      <span>综合评分 <b>7.5 / 10</b></span>
+    </div>
+    <div style="margin-top:14px">
+      <span class="badge good">安全头完备</span>
+      <span class="badge">限流与缓存策略专业</span>
+      <span class="badge">无 HTTPS</span>
+      <span class="badge">未备案</span>
+      <span class="badge">统计数字故障</span>
+    </div>
+    <div class="verdict">
+      <p><b>一句话总评：</b>学生个人博客里工程化水平相当高的一档——部署功底明显强于绝大多数同期候选人；但当前三个硬伤（统计数字全为 0、无 HTTPS、无域名与 ICP 备案）会直接拉低面试评价，属于"发布前必修"。</p>
+    </div>
+  </div>
+</header>
+
+<!-- ===== 总评与雷达 ===== -->
+<section>
+  <div class="wrap">
+    <div class="kicker">01 / OVERALL</div>
+    <h2>六维评分总览</h2>
+    <p class="muted">评分基于线上实测（响应头、资源、404、压缩）与源码通读（nginx、模板、部署脚本、笔记），10 分制，含主观判断。</p>
+    <div class="radar-box">
+      <div id="radar"></div>
+    </div>
+    <p class="caption">口径：工程化部署 9（nginx 配置、安全头、缓存、限流、构建脚本均专业，扣分项为无 CI 与无回滚）；前端设计 8（自定义首页视觉优秀，扣分项为统计数字 bug）；内容深度 7（59 篇、多篇 40–50KB 深度文章，但质量参差）；安全合规 6（安全响应头满分，但无 HTTPS/HSTS、无 ICP 备案、root 直连 SSH）；SEO 7（meta/RSS/sitemap 齐全，但 description 太短、无域名）；可维护性 8（git、README、导入脚本齐全，扣分项为手动部署）。</p>
+  </div>
+</section>
+
+<!-- ===== 亮点 ===== -->
+<section>
+  <div class="wrap">
+    <div class="kicker">02 / STRENGTHS</div>
+    <h2>面试官会加分的点</h2>
+    <p class="muted">这些如果面试时能主动讲出来，是很好的加分项。</p>
+    <div class="grid2">
+      <div class="card">
+        <h3><span class="num">01</span>Nginx 配置非常专业</h3>
+        <ul>
+          <li>完整安全头实测全部下发：CSP、X-Frame-Options DENY、nosniff、Referrer-Policy、Permissions-Policy、COOP</li>
+          <li>限流 16r/s + burst 32、连接数 24，静态站防扫描的正确姿势</li>
+          <li>分类型缓存：指纹资源 1y、图片 30d、首页 no-cache、ETag 开启</li>
+          <li>主动拦截 .git、备份包、wp-admin 等扫描噪音；server_tokens off</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="num">02</span>SEO 基建完整</h3>
+        <ul>
+          <li>robots.txt + 31KB sitemap.xml + RSS + JSON 搜索索引</li>
+          <li>og / twitter 卡片、canonical、hreflang 齐备</li>
+          <li>favicon 全套：svg、16/32px、apple-touch-icon、safari-pinned-tab</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="num">03</span>构建产物质量</h3>
+        <ul>
+          <li>gzip 实测生效（HTML/CSS 均返回 Content-Encoding: gzip）</li>
+          <li>CSS/JS 带 SRI 指纹，404 返回真实 404 状态码</li>
+          <li>index.json 全站搜索索引可用</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="num">04</span>工程习惯与内容体量</h3>
+        <ul>
+          <li>git 管理、.deploy.env.example、11KB README、导入脚本与链接检查脚本</li>
+          <li>59 篇笔记、17 个公开项目，最近更新至 10.25，"持续更新"属实</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== P0 硬伤 ===== -->
+<section>
+  <div class="wrap">
+    <div class="kicker">03 / MUST FIX</div>
+    <h2>发布前必修的硬伤（P0）</h2>
+
+    <div class="card" style="margin-top:16px">
+      <h3><span class="prio p0">P0</span>首页统计数字全为 0 —— 发布的是旧构建</h3>
+      <p>线上首页显示"0篇技术笔记、0篇 CTF Writeup、0个公开项目"，横幅却显示"59 篇笔记 · 17 个公开项目"，数据自相矛盾。已定位根因：统计数字由 <code>initCounters()</code> 动画渲染，但线上加载的 <code>main.min.ada32aaf….js</code>（13960 字节）不含该函数——本地 <code>assets/js/main.js</code>（31373 字节）已更新，<code>public/</code> 却未重新构建，部署仍是旧版。</p>
+      <div class="fix">
+        <b>修复</b>
+<pre>hugo --gc --minify --cleanDestinationDir   # 重新构建后再部署，build-upload.ps1 顺带完成</pre>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <h3><span class="prio p0">P0</span>没有 HTTPS（443）—— nginx 里其实已写好路径</h3>
+      <p>你的 <code>nginx/blog</code> 末尾注释里已经有完整步骤。建议在此基础上补 OCSP Stapling、HTTP/2、现代 TLS 参数；HSTS 等 HTTPS 稳定运行两周后再开。</p>
+      <div class="fix">
+        <b>修复</b>
+<pre>sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d 你的域名        # 自动配好 TLS + 80→443 跳转</pre>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <h3><span class="prio p0">P0</span>域名 + ICP 备案 —— 大陆服务器合规红线</h3>
+      <p>当前 IP 直连 + <code>server_name _</code> 带来两个问题：大陆境内服务器绑定域名必须 ICP 备案，否则会被阻断；且 HTTPS 证书只认域名，裸 IP + 无 HTTPS 投简历直接扣印象分。备案周期约 2–3 周，越早提交越好。</p>
+      <div class="fix">
+        <b>修复</b>
+<pre>买域名 → 阿里云 ICP 备案 → 改 hugo.yaml 的 baseURL 为 https://你的域名/ → 重建部署
+（canonical / og:url / sitemap 会随 baseURL 全部变对）</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== P1 问题表 ===== -->
+<section>
+  <div class="wrap">
+    <div class="kicker">04 / SECONDARY</div>
+    <h2>重要但非致命的问题（P1）</h2>
+    <table>
+      <colgroup><col class="col-w-30"><col class="col-w-40"><col class="col-w-30"></colgroup>
+      <tr><th>问题</th><th>证据</th><th>建议</th></tr>
+      <tr><td>17 个项目 vs 6 个详情页</td><td>data/projects.yaml 17 条，content/projects 仅 6 个</td><td>口径没问题：11 个是纯 GitHub 外链。建议区分"有详情页"与"仓库链接"</td></tr>
+      <tr><td>description meta 仅 9 字</td><td>线上 description="记录代码、安全与思考"，hugo.yaml 里 50 字完整版未生效</td><td>检查首页模板是否覆盖 params.description；完整描述对 SEO 与印象分更好</td></tr>
+      <tr><td>og:image 245KB PNG</td><td>images/og-cover.png</td><td>转 WebP 或压到 100KB 内，社交分享加载更快</td></tr>
+      <tr><td>index.json 436KB</td><td>全站搜索索引</td><td>已有 gzip 无碍；可考虑按需裁剪</td></tr>
+      <tr><td>页面仍输出 http 绝对地址</td><td>og:url、canonical 指向 http://47.93.123.112/</td><td>换域名 + HTTPS 后重建自动修复</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===== 内容质量 ===== -->
+<section>
+  <div class="wrap">
+    <div class="kicker">05 / CONTENT</div>
+    <h2>内容质量抽查（面试官会逐篇看）</h2>
+    <div class="duo">
+      <div class="card">
+        <h3>质量标杆：crypto-md5.md（50KB）</h3>
+        <p>从 RFC 1321 填充规则、四轮压缩讲到 22 组测试向量对拍、雪崩效应实测、踩坑记录（CRLF 模式、编码、掩码 bug），最后有心得体会。<b class="mono" style="color:var(--teal)">"原理 + 实现 + 验证 + 踩坑"完整闭环，是面试官最想看到的。</b></p>
+      </div>
+      <div class="card warn">
+        <h3>需要修：java-deserialization-lab.md（19KB）</h3>
+        <p>大量错别字与笔误：<code>importDogsBase64</code>、<code>chainWagTil</code>、<code>ArryList</code>；代码用缩进列表而非代码块；反编译残留（var30）直接贴入；残留真实靶场端口。</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h3>统一建议</h3>
+      <ul>
+        <li>发布前跑一遍 scripts/check_links.py + 错别字扫描（typos / vale，几秒钟）</li>
+        <li>代码一律用 fenced code block，反编译残留要清理</li>
+        <li>靶场 IP、端口、凭据统一脱敏（java-deserialization-lab.md 里还留着端口）</li>
+        <li>5–7KB 的工具用法类小笔记可合并进"安全工具"专题，Writeup 才是面试价值主力</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 安全补充 ===== -->
+<section>
+  <div class="wrap">
+    <div class="kicker">06 / SECURITY</div>
+    <h2>安全维度补充（你既然是安全方向，这里会被重点问）</h2>
+    <div class="grid2">
+      <div class="card">
+        <h3><span class="num">01</span>CSP 的 unsafe-inline</h3>
+        <p>script-src 保留 unsafe-inline 是因为 extend_head.html 里有内联脚本。面试官可能问"为什么不能去掉"——要能答出迁移方案（外链文件或 hash/nonce）。</p>
+      </div>
+      <div class="card">
+        <h3><span class="num">02</span>部署账号</h3>
+        <p>build-upload.ps1 默认 root 用户 + SSH 22 直连。建议：低权限用户 + SSH Key 登录 + 禁止 root 登录 + 高位 SSH 端口。</p>
+      </div>
+      <div class="card">
+        <h3><span class="num">03</span>监控与回滚</h3>
+        <p>已有 limit_req，可加 fail2ban 防爆破并在简历写"访问日志分析与异常 IP 封禁"；部署脚本是 tar 覆盖式，建议保留上一版本 tar 实现 5 秒回滚。</p>
+      </div>
+      <div class="card">
+        <h3><span class="num">04</span>HTTPS 后的配置清单</h3>
+        <ul>
+          <li>ssl_stapling on / verify on（OCSP 装订）</li>
+          <li>ssl_session_cache shared:SSL:10m</li>
+          <li>TLSv1.2/1.3，listen 443 ssl http2</li>
+          <li>HSTS：max-age=31536000; includeSubDomains（稳定后再加）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 面试问答 ===== -->
+<section>
+  <div class="wrap">
+    <div class="kicker">07 / INTERVIEW</div>
+    <h2>面试官大概率会问的问题</h2>
+    <table>
+      <colgroup><col class="col-w-30"><col class="col-w-70"></colgroup>
+      <tr><th>提问</th><th>建议应答要点</th></tr>
+      <tr><td>为什么选 Hugo 而不是 Hexo / VuePress？</td><td>SSG 静态站安全性（无动态执行面）、构建速度、模板可定制性；实际覆盖了自定义首页模板 + 资源管线指纹</td></tr>
+      <tr><td>你的 nginx 为什么这么配？</td><td>逐条讲：CSP/XFO 防注入与点击劫持、限流防扫描、分级缓存、隐藏文件拦截——这是最能展示深度的部分</td></tr>
+      <tr><td>HTTPS 怎么上？证书怎么续？</td><td>certbot 自动续期（certbot renew + cron）、OCSP Stapling、HSTS 开启时机</td></tr>
+      <tr><td>SSG 和 SSR 的区别？为什么用 SSG？</td><td>构建期 vs 请求期渲染；静态站无服务端代码 = 攻击面小，适合安全博客</td></tr>
+      <tr><td>你的博客有什么攻击面？</td><td>诚实回答：纯静态 + nginx，几乎无动态攻击面；风险集中在 SSH 安全、证书、nginx 配置本身</td></tr>
+      <tr><td>为什么不用 GitHub Pages 免费托管？</td><td>自建理由：可控性（自定义 nginx 行为、限流、日志）、国内访问速度、附属能力</td></tr>
+      <tr><td>59 篇笔记怎么保证质量？</td><td>check_links.py、MD5 22 组向量对拍、Obsidian 导入流程</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===== 30 天时间轴 ===== -->
+<section>
+  <div class="wrap">
+    <div class="kicker">08 / ACTION PLAN</div>
+    <h2>30 天行动清单</h2>
+    <div class="timeline">
+      <div class="tl-row">
+        <div class="tl-time">第 1 周</div>
+        <div class="tl-axis"><span class="tl-dot"></span></div>
+        <div class="tl-body"><h3>修数字 bug 与内容</h3><p>重新构建部署（统计数字恢复）；清理 java-deserialization-lab 错别字与代码格式；修正 description meta。</p></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-time">第 2 周</div>
+        <div class="tl-axis"><span class="tl-dot"></span></div>
+        <div class="tl-body"><h3>域名 + 备案</h3><p>购买域名，提交阿里云 ICP 备案（周期最长，越早越好）。</p></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-time">第 3 周</div>
+        <div class="tl-axis"><span class="tl-dot"></span></div>
+        <div class="tl-body"><h3>上 HTTPS</h3><p>备案通过 → 改 baseURL 重建 → certbot 签发 → 开启 OCSP / HTTP2 / HSTS。</p></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-time">第 4 周</div>
+        <div class="tl-axis"><span class="tl-dot"></span></div>
+        <div class="tl-body"><h3>加固与运营</h3><p>部署脚本改非 root + Key 登录、加回滚；提交站长平台；写 1–2 篇高质量复盘（"博客构建踩坑记录"本身就是一篇好笔记）。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 页脚 ===== -->
+<footer>
+  <div class="wrap">
+    <div class="kicker">APPENDIX</div>
+    <p><b>评审方式与范围</b></p>
+    <p class="scope">
+      线上实测：HTTP 响应头（安全头、gzip、ETag）、robots/sitemap/favicon/og 资源、404 状态、主要页面可访问性、main.min.js 指纹比对。<br>
+      源码通读：hugo.yaml、nginx/blog、layouts/index.html、assets/js/main.js、scripts/build-upload.ps1、data/projects.yaml、content 全量笔记清单与两篇代表性笔记全文。<br>
+      未覆盖：移动端真机渲染细节、浏览器兼容性矩阵、Google 搜索收录情况、备案与证书的实际办理。<br>
+      所有评分为主观判断，依据均来自上述实测与源码证据；修复命令以你当前 Ubuntu/Debian + certbot 环境为基准。
+    </p>
+    <p style="margin-top:16px" class="mono">报告生成：2026-10-27 · 漩涡博客 xuanwo</p>
+  </div>
+</footer>
+
+<script src="https://fastly.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script>
+(function(){
+  var chart = echarts.init(document.getElementById('radar'));
+  var option = {
+    title: { text: '六维评分（满分 10）', left: 'center', top: 6, textStyle: { color: '#d9e3dd', fontSize: 14, fontWeight: 700 } },
+    tooltip: { trigger: 'item', triggerOn: 'mousemove|click', renderMode: 'richText', confine: true },
+    radar: {
+      indicator: [
+        { name: '工程化部署', max: 10 },
+        { name: '前端设计', max: 10 },
+        { name: '内容深度', max: 10 },
+        { name: '安全合规', max: 10 },
+        { name: 'SEO 可发现性', max: 10 },
+        { name: '可维护性', max: 10 }
+      ],
+      center: ['50%', '56%'],
+      radius: '66%',
+      axisName: { color: '#8fa39a', fontSize: 12 },
+      splitLine: { lineStyle: { color: 'rgba(140,190,170,.22)' } },
+      splitArea: { areaStyle: { color: ['rgba(45,212,167,.03)', 'rgba(45,212,167,.08)'] } },
+      axisLine: { lineStyle: { color: 'rgba(140,190,170,.35)' } }
+    },
+    series: [{
+      type: 'radar',
+      data: [{
+        name: '漩涡博客',
+        value: [9, 8, 7, 6, 7, 8],
+        symbol: 'circle',
+        symbolSize: 6,
+        lineStyle: { width: 2, color: '#2dd4a7' },
+        itemStyle: { color: '#f0b429' },
+        areaStyle: { color: 'rgba(45,212,167,.22)' }
+      }]
+    }]
+  };
+  chart.setOption(option);
+  window.addEventListener('resize', function(){ chart.resize(); });
+})();
+</script>
+</body>
+</html>

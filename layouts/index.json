@@ -1,0 +1,14 @@
+{{- $index := slice -}}
+{{- range site.RegularPages -}}
+  {{- if and (not .Params.searchHidden) (ne .Layout `archives`) (ne .Layout `search`) -}}
+    {{- $summary := .Summary | plainify | htmlUnescape | chomp -}}
+    {{- $terms := delimit (.Params.tags | default slice) " " -}}
+    {{- $index = $index | append (dict
+      "title" .Title
+      "content" (printf "%s %s" $summary $terms)
+      "permalink" .Permalink
+      "summary" $summary
+    ) -}}
+  {{- end -}}
+{{- end -}}
+{{- $index | jsonify -}}

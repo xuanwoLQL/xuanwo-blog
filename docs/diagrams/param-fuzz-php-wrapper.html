@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>参数发现与伪协议利用</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f6f2e9; color: #0c211c; font-family: 'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif; }
+    .frame { max-width: 1040px; margin: 0 auto; padding: 32px 24px; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    svg { width: 100%; min-width: 960px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame"><div class="diagram-container">
+    <svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="param-fuzz-php-wrapper-title param-fuzz-php-wrapper-desc">
+      <title id="param-fuzz-php-wrapper-title">参数发现与伪协议利用</title>
+      <desc id="param-fuzz-php-wrapper-desc">先找到真正进入 include 的参数，再用 PHP 包装器读取源码。</desc>
+      
+<rect width="960" height="600" fill="#f6f2e9"/>
+
+<defs>
+  <marker id="param-fuzz-php-wrapper-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#5b726a"/>
+  </marker>
+  <marker id="param-fuzz-php-wrapper-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#0f766e"/>
+  </marker>
+  <marker id="param-fuzz-php-wrapper-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#0369a1"/>
+  </marker>
+</defs>
+<text x="40" y="38" fill="#5b726a" font-size="8" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.16em">REPRODUCTION FLOW</text>
+<text x="40" y="70" fill="#0c211c" font-size="26" font-family="'Noto Serif SC','Source Han Serif SC','Songti SC','SimSun',serif" text-anchor="start" font-weight="400">参数发现与伪协议利用</text>
+<text x="40" y="94" fill="#5b726a" font-size="10" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">先找到真正进入 include 的参数，再用 PHP 包装器读取源码。</text>
+<line x1="40" y1="112" x2="920" y2="112" stroke="rgba(12,33,28,0.14)" stroke-width="0.8"/>
+      <line x1="187.6" y1="246" x2="220.6" y2="246" stroke="#5b726a" stroke-width="1.1" marker-end="url(#param-fuzz-php-wrapper-arrow)"/><line x1="371.2" y1="246" x2="404.2" y2="246" stroke="#5b726a" stroke-width="1.1" marker-end="url(#param-fuzz-php-wrapper-arrow)"/><line x1="554.8" y1="246" x2="587.8" y2="246" stroke="#5b726a" stroke-width="1.1" marker-end="url(#param-fuzz-php-wrapper-arrow)"/><line x1="738.4" y1="246" x2="771.4" y2="246" stroke="#0f766e" stroke-width="1.4" marker-end="url(#param-fuzz-php-wrapper-arrow-accent)"/><rect x="40" y="190" width="145.6" height="112" rx="8" fill="#fffdf8" stroke="rgba(12,33,28,0.28)" stroke-width="1"/><rect x="48" y="198" width="38" height="14" rx="2" fill="transparent" stroke="rgba(12,33,28,0.28)" stroke-width="0.8"/><text x="67" y="208" fill="rgba(12,33,28,0.28)" font-size="7" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.08em">01</text><text x="112.8" y="236" fill="#0c211c" font-size="13" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">发现参数</text><text x="112.8" y="270" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">字典 / 源码</text><rect x="223.6" y="190" width="145.6" height="112" rx="8" fill="#fffdf8" stroke="rgba(12,33,28,0.28)" stroke-width="1"/><rect x="231.6" y="198" width="38" height="14" rx="2" fill="transparent" stroke="rgba(12,33,28,0.28)" stroke-width="0.8"/><text x="250.6" y="208" fill="rgba(12,33,28,0.28)" font-size="7" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.08em">02</text><text x="296.4" y="236" fill="#0c211c" font-size="13" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">确认 include</text><text x="296.4" y="270" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">报错 / 路径变化</text><rect x="407.2" y="190" width="145.6" height="112" rx="8" fill="#fffdf8" stroke="rgba(12,33,28,0.28)" stroke-width="1"/><rect x="415.2" y="198" width="38" height="14" rx="2" fill="transparent" stroke="rgba(12,33,28,0.28)" stroke-width="0.8"/><text x="434.2" y="208" fill="rgba(12,33,28,0.28)" font-size="7" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.08em">03</text><text x="480" y="236" fill="#0c211c" font-size="13" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">测试包装器</text><text x="480" y="270" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">filter / data / phar</text><rect x="590.8" y="190" width="145.6" height="112" rx="8" fill="#fffdf8" stroke="rgba(12,33,28,0.28)" stroke-width="1"/><rect x="598.8" y="198" width="38" height="14" rx="2" fill="transparent" stroke="rgba(12,33,28,0.28)" stroke-width="0.8"/><text x="617.8" y="208" fill="rgba(12,33,28,0.28)" font-size="7" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.08em">04</text><text x="663.6" y="236" fill="#0c211c" font-size="13" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">绕过过滤</text><text x="663.6" y="270" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">编码 / 双写</text><rect x="774.4" y="190" width="145.6" height="112" rx="8" fill="rgba(15,118,110,0.08)" stroke="#0f766e" stroke-width="1"/><rect x="782.4" y="198" width="38" height="14" rx="2" fill="transparent" stroke="#0f766e" stroke-width="0.8"/><text x="801.4" y="208" fill="#0f766e" font-size="7" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.08em">05</text><text x="847.2" y="236" fill="#0c211c" font-size="13" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">读取源码</text><text x="847.2" y="270" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">解码并还原</text>
+      
+<rect x="40" y="344" width="3" height="56" rx="1.5" fill="#0f766e"/>
+<text x="60" y="366" fill="#0f766e" font-size="8" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.14em">关键判断</text>
+<text x="60" y="388" fill="#0c211c" font-size="13" font-family="'Noto Serif SC','Source Han Serif SC','Songti SC','SimSun',serif" text-anchor="start">参数名、过滤器和包装器能力必须分别验证。</text>
+      
+<line x1="40" y1="532" x2="920" y2="532" stroke="rgba(12,33,28,0.14)" stroke-width="0.8"/>
+<text x="40" y="548" fill="#5b726a" font-size="8" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.16em">LEGEND</text>
+<rect x="122" y="538" width="28" height="12" rx="2" fill="#fffdf8" stroke="rgba(12,33,28,0.28)" stroke-width="0.8"/>
+<text x="158" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">执行步骤</text>
+<rect x="278" y="538" width="28" height="12" rx="2" fill="rgba(15,118,110,0.08)" stroke="#0f766e" stroke-width="0.8"/>
+<text x="314" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">关键节点</text>
+<line x1="438" y1="544" x2="476" y2="544" stroke="#5b726a" stroke-width="1.2" marker-end="url(#param-fuzz-php-wrapper-arrow)"/>
+<text x="488" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">执行方向</text>
+    </svg>
+  </div></div>
+</body>
+</html>

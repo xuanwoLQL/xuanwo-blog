@@ -1,0 +1,222 @@
+{{- define "main" -}}
+{{- $notes := (where site.RegularPages "Section" "notes").ByDate.Reverse -}}
+{{- $projects := hugo.Data.projects.items -}}
+{{- $featured := where $projects "featured" true -}}
+{{- $ctf := where $notes "Params.categories" "intersect" (slice "CTF Writeup") -}}
+{{- $collections := slice
+    (dict "name" "CTF Writeup" "slug" "ctf-writeup" "desc" "比赛题解与赛后复盘" "icon" "flag" "accent" "teal")
+    (dict "name" "Web 安全" "slug" "web" "desc" "漏洞原理与利用链" "icon" "bug" "accent" "gold")
+    (dict "name" "渗透测试" "slug" "pentest" "desc" "外网打点与内网横向" "icon" "crosshair" "accent" "rose")
+    (dict "name" "密码学" "slug" "crypto" "desc" "算法实现与破译" "icon" "key" "accent" "violet")
+    (dict "name" "网络编程" "slug" "network" "desc" "Socket、并发与协议" "icon" "network" "accent" "blue")
+    (dict "name" "AI × 安全" "slug" "ai" "desc" "Agent 与提示词实践" "icon" "spark" "accent" "green")
+    (dict "name" "安全工具" "slug" "tools" "desc" "工具箱与速查手册" "icon" "wrench" "accent" "gold")
+    (dict "name" "安全指南" "slug" "guide" "desc" "从零开始的路线" "icon" "book" "accent" "teal")
+    (dict "name" "操作系统" "slug" "os" "desc" "内核与系统基础" "icon" "cpu" "accent" "blue")
+-}}
+
+<section class="hero" id="hero">
+    <div class="hero-inner">
+        <div class="hero-copy reveal">
+            <p class="eyebrow hero-eyebrow"><span class="signal-dot"></span>SECURITY STUDENT · CTF PLAYER · NOTE TAKER</p>
+            <h1 class="hero-title">我是 <span>xuanwo</span>，<br><strong>在实战里学习安全。</strong></h1>
+            <p class="hero-lead">一名网络安全学生，主攻 Web 安全、CTF 与内网渗透，也在持续补密码学、网络协议和 AI Agent 的工程基础。</p>
+            <p class="hero-body">目前维护 {{ len $notes }} 篇公开技术笔记和 {{ len $projects }} 个公开项目，覆盖 CTF Writeup、漏洞复现、密码学与网络编程。我更习惯从实战倒推原理，把判断过程、失败分支和验证方法整理成可以重新跑通的记录。</p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="#collections">
+                    按专题开始阅读
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                </a>
+                <a class="btn btn-ghost" href="{{ "about/" | relLangURL }}">完整经历</a>
+            </div>
+            <div class="hero-links">
+                <a href="https://github.com/xuanwoLQL" target="_blank" rel="noopener">GitHub</a>
+                <a href="{{ "index.xml" | relLangURL }}">RSS</a>
+            </div>
+        </div>
+
+        <aside class="profile-card reveal" style="--d: 90ms" aria-label="个人档案摘要">
+            <div class="profile-bar">
+                <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="profile-path">~/xuanwo/profile</span>
+                <span class="profile-state"><i aria-hidden="true"></i>UPDATED 2026.10</span>
+            </div>
+            <div class="profile-body">
+                <p class="profile-command"><span>$</span> whoami</p>
+                <p class="profile-output"><strong>网络安全学生 / CTF 选手</strong><br>记录 Web 安全、内网渗透与实验复现</p>
+
+                <p class="profile-command"><span>$</span> cat current_focus.txt</p>
+                <div class="profile-tags">
+                    <span>Web 安全</span>
+                    <span>内网渗透</span>
+                    <span>AI × Security</span>
+                    <span>密码学</span>
+                </div>
+
+                <p class="profile-command"><span>$</span> tail -n 3 record.log</p>
+                <ol class="profile-log">
+                    <li><time>2026.08</time><span>OpenHarmony CTF · 第 16 名进入决赛</span></li>
+                    <li><time>2026.09</time><span>京津冀网络攻防赛 · 第 69 名进入决赛</span></li>
+                    <li><time>2026.09</time><span>河北烟草局网络安全演习 · 配合奇安信</span></li>
+                </ol>
+            </div>
+            <a class="profile-foot" href="{{ "about/" | relLangURL }}">
+                <span>正在备战 OpenHarmony CTF 决赛</span>
+                <span aria-hidden="true">完整档案 →</span>
+            </a>
+        </aside>
+    </div>
+</section>
+
+<section class="stats" id="stats" aria-label="站点数据">
+    <div class="stat">
+        <span class="stat-num" data-count="{{ len $notes }}">{{ len $notes }}</span>
+        <span class="stat-label">篇技术笔记</span>
+    </div>
+    <div class="stat">
+        <span class="stat-num" data-count="{{ len $ctf }}">{{ len $ctf }}</span>
+        <span class="stat-label">篇 CTF Writeup</span>
+    </div>
+    <div class="stat">
+        <span class="stat-num" data-count="{{ len $projects }}">{{ len $projects }}</span>
+        <span class="stat-label">个公开项目</span>
+    </div>
+    <div class="stat">
+        <span class="stat-num" data-count="{{ len $collections }}">{{ len $collections }}</span>
+        <span class="stat-label">个笔记专题</span>
+    </div>
+</section>
+
+<section class="record-section" aria-labelledby="record-title">
+    <div class="record-head reveal">
+        <div>
+            <p class="eyebrow">SELECTED RECORDS / 2026</p>
+            <h2 id="record-title">2026：竞赛、演习与能力认证</h2>
+        </div>
+        <a class="section-link" href="{{ "about/" | relLangURL }}">完整经历 <span>→</span></a>
+    </div>
+    <div class="record-grid">
+        <article class="record-item reveal">
+            <span class="record-date">2026.08</span>
+            <h3>第二届 OpenHarmony CTF</h3>
+            <p>Capture The Flaw 智能漏洞挖掘赛，以第 16 名进入决赛。</p>
+            <span class="record-status">决赛准备中</span>
+        </article>
+        <article class="record-item reveal" style="--d: 60ms">
+            <span class="record-date">2026.09</span>
+            <h3>京津冀信息安全网络攻防赛</h3>
+            <p>与「不迷茫」战队参赛，以第 69 名进入决赛。</p>
+            <span class="record-status">已进入决赛</span>
+        </article>
+        <article class="record-item reveal" style="--d: 120ms">
+            <span class="record-date">2026.09</span>
+            <h3>河北烟草局网络安全演习</h3>
+            <p>经老师推荐参与，配合奇安信完成网络安全演习任务。</p>
+            <span class="record-status">企业实践</span>
+        </article>
+        <article class="record-item reveal" style="--d: 180ms">
+            <span class="record-date">2026.05—06</span>
+            <h3>竞赛与能力认证</h3>
+            <p>蓝桥杯大赛省三等奖；IITC 工信人才岗位能力评价证书。</p>
+            <span class="record-status">持续积累</span>
+        </article>
+    </div>
+</section>
+
+<section class="section collections-section" id="collections">
+    <div class="section-head reveal">
+        <div>
+            <p class="eyebrow">01 / NOTE COLLECTIONS</p>
+            <h2>按专题研读</h2>
+            <p class="section-note">先选一个方向，再顺着原理、利用链和验证实验往下读。</p>
+        </div>
+        <a class="section-link" href="{{ "notes/" | relLangURL }}">笔记库 <span>→</span></a>
+    </div>
+
+    <div class="collections">
+        {{- range $collections }}
+        {{- $count := len (where $notes "Params.categories" "intersect" (slice .name)) }}
+        <a class="collection-card reveal" data-accent="{{ .accent }}" href="{{ "notes/" | relLangURL }}?cat={{ .slug }}">
+            {{ partial "collection-icon.html" .icon }}
+            <div class="collection-body">
+                <h3>{{ .name }}</h3>
+                <p>{{ .desc }}</p>
+            </div>
+            <span class="collection-count">{{ $count }}</span>
+            <span class="collection-arrow" aria-hidden="true">→</span>
+        </a>
+        {{- end }}
+    </div>
+</section>
+
+<section class="section notes-section" id="latest">
+    <div class="section-head reveal">
+        <div>
+            <p class="eyebrow">02 / LATEST NOTES</p>
+            <h2>最近写下的东西</h2>
+        </div>
+        <a class="section-link" href="{{ "notes/" | relLangURL }}">全部笔记 <span>→</span></a>
+    </div>
+
+    <div class="latest-list">
+        {{- range $i, $p := first 6 $notes }}
+        <a class="latest-row reveal" href="{{ $p.RelPermalink }}" style="--d: {{ mul $i 60 }}ms">
+            <time class="latest-date" datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "2006.01.02" }}</time>
+            <span class="latest-title">{{ $p.Title }}</span>
+            <span class="latest-cat">{{ with $p.Params.categories }}{{ index . 0 }}{{ end }}</span>
+            <span class="latest-arrow" aria-hidden="true">→</span>
+        </a>
+        {{- end }}
+    </div>
+</section>
+
+<section class="section projects-section" id="projects">
+    <div class="section-head reveal">
+        <div>
+            <p class="eyebrow">03 / SELECTED PROJECTS</p>
+            <h2>把想法做成能跑的东西</h2>
+            <p class="section-note">公开仓库、实验工具与可复现的工程记录。</p>
+        </div>
+        <a class="section-link" href="{{ "projects/" | relLangURL }}">全部项目 <span>→</span></a>
+    </div>
+
+    <div class="bento">
+        {{- range $featured }}
+        {{- $href := .url }}
+        {{- $external := true }}
+        {{- with .detail }}{{ $href = . | relLangURL }}{{ $external = false }}{{ end }}
+        <a class="bento-card {{ .span }} spotlight reveal" data-accent="{{ .accent }}" href="{{ $href }}"
+           {{- if $external }} target="_blank" rel="noopener"{{ end }}>
+            <span class="bento-watermark" aria-hidden="true">{{ substr .name 0 1 | upper }}</span>
+            <div class="bento-top">
+                <span class="lang-dot" style="--dot: {{ .language_color }}"></span>
+                <span class="bento-cat">{{ .category }}</span>
+                <span class="bento-arrow">{{ if $external }}↗{{ else }}→{{ end }}</span>
+            </div>
+            <h3>{{ .title }}</h3>
+            <p>{{ .description }}</p>
+            <div class="bento-foot">
+                <div class="tech-chips">
+                    {{- range first 2 .tech }}<span>{{ . }}</span>{{ end }}
+                </div>
+                <span class="bento-lang">{{ .language }}</span>
+            </div>
+        </a>
+        {{- end }}
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="cta-panel reveal spotlight">
+        <div class="cta-glow" aria-hidden="true"></div>
+        <p class="eyebrow">04 / OPEN TO COLLABORATE</p>
+        <h2>一起把复杂的东西讲清楚。</h2>
+        <p class="cta-text">如果你也在做 CTF、靶场、安全工程或网络编程，欢迎交流。
+        所有内容只用于合法授权的学习、研究与竞赛环境。</p>
+        <div class="cta-actions">
+            <a class="btn btn-primary" href="https://github.com/xuanwoLQL" target="_blank" rel="noopener">在 GitHub 找到我</a>
+            <a class="btn btn-ghost" href="{{ "about/" | relLangURL }}">了解更多</a>
+        </div>
+    </div>
+</section>
+{{- end -}}

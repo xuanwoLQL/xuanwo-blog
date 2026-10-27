@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="python-gui-chatroom-title python-gui-chatroom-desc" id="python-gui-chatroom-root">
+      <title id="python-gui-chatroom-title">GUI 聊天室组件关系</title>
+      <desc id="python-gui-chatroom-desc">Tkinter 界面负责输入和显示，网络线程负责收发，服务器负责广播。</desc>
+      
+<rect width="960" height="600" fill="#f6f2e9"/>
+
+<defs>
+      <style>#python-gui-chatroom-root { color: #0c211c; font-family: 'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif; }
+      #python-gui-chatroom-root .diagram-container { width: 100%; overflow-x: auto; }</style>
+  <marker id="python-gui-chatroom-python-gui-chatroom-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#5b726a"/>
+  </marker>
+  <marker id="python-gui-chatroom-python-gui-chatroom-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#0f766e"/>
+  </marker>
+  <marker id="python-gui-chatroom-python-gui-chatroom-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#0369a1"/>
+  </marker>
+</defs>
+<text x="40" y="38" fill="#5b726a" font-size="8" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.16em">ARCHITECTURE</text>
+<text x="40" y="70" fill="#0c211c" font-size="26" font-family="'Noto Serif SC','Source Han Serif SC','Songti SC','SimSun',serif" text-anchor="start" font-weight="400">GUI 聊天室组件关系</text>
+<text x="40" y="94" fill="#5b726a" font-size="10" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">Tkinter 界面负责输入和显示，网络线程负责收发，服务器负责广播。</text>
+<line x1="40" y1="112" x2="920" y2="112" stroke="#0c211c" stroke-width="0.8" stroke-opacity="0.14"/>
+      <rect x="40" y="150" width="260" height="330" rx="8" fill="#0c211c" stroke="#0c211c" stroke-width="0.8" fill-opacity="0.025" stroke-opacity="0.14"/><rect x="52" y="154" width="72" height="14" rx="2" fill="#f6f2e9"/><text x="88" y="164" fill="#5f736b" font-size="7.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.12em">CLIENT</text><rect x="350" y="150" width="260" height="330" rx="8" fill="#0c211c" stroke="#0c211c" stroke-width="0.8" fill-opacity="0.025" stroke-opacity="0.14"/><rect x="362" y="154" width="72" height="14" rx="2" fill="#f6f2e9"/><text x="398" y="164" fill="#5f736b" font-size="7.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.12em">SERVER</text><rect x="660" y="150" width="260" height="330" rx="8" fill="#0c211c" stroke="#0c211c" stroke-width="0.8" fill-opacity="0.025" stroke-opacity="0.14"/><rect x="672" y="154" width="72" height="14" rx="2" fill="#f6f2e9"/><text x="708" y="164" fill="#5f736b" font-size="7.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.12em">STATE</text>
+      <path d="M 273,286 H 376" fill="none" stroke="#0369a1" stroke-width="1.15" marker-end="url(#python-gui-chatroom-python-gui-chatroom-arrow-link)"/><path d="M 583,286 H 686" fill="none" stroke="#0f766e" stroke-width="1.15" marker-end="url(#python-gui-chatroom-python-gui-chatroom-arrow-accent)"/>
+      <rect x="70" y="250" width="200" height="72" rx="7" fill="#fffdf8" stroke="#0c211c" stroke-width="1" stroke-opacity="0.28"/><rect x="78" y="257" width="49" height="12" rx="2" fill="none" stroke="#0c211c" stroke-width="0.8" stroke-opacity="0.28"/><text x="102.5" y="266" fill="#0c211c" font-size="6.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.06em" fill-opacity="0.28">TKINTER</text><text x="170" y="290" fill="#0c211c" font-size="12.5" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">GUI + 网络线程</text><text x="170" y="306" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">输入 / recv / send</text><rect x="380" y="250" width="200" height="72" rx="7" fill="#0f766e" stroke="#0f766e" stroke-width="1" fill-opacity="0.08"/><rect x="388" y="257" width="38" height="12" rx="2" fill="none" stroke="#0f766e" stroke-width="0.8"/><text x="407" y="266" fill="#0f766e" font-size="6.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.06em">TCP</text><text x="480" y="290" fill="#0c211c" font-size="12.5" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">聊天服务器</text><text x="480" y="306" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">连接管理</text><rect x="690" y="250" width="200" height="72" rx="7" fill="#fffdf8" stroke="#0c211c" stroke-width="1" stroke-opacity="0.28"/><rect x="698" y="257" width="63" height="12" rx="2" fill="none" stroke="#0c211c" stroke-width="0.8" stroke-opacity="0.28"/><text x="729.5" y="266" fill="#0c211c" font-size="6.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.06em" fill-opacity="0.28">BROADCAST</text><text x="790" y="290" fill="#0c211c" font-size="12.5" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">消息广播</text><text x="790" y="306" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">在线客户端集合</text>
+      
+<line x1="40" y1="532" x2="920" y2="532" stroke="#0c211c" stroke-width="0.8" stroke-opacity="0.14"/>
+<text x="40" y="548" fill="#5b726a" font-size="8" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.16em">LEGEND</text>
+<rect x="122" y="538" width="28" height="12" rx="2" fill="#fffdf8" stroke="#0c211c" stroke-width="0.8" stroke-opacity="0.28"/>
+<text x="158" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">组件</text>
+<rect x="278" y="538" width="28" height="12" rx="2" fill="#0f766e" stroke="#0f766e" stroke-width="0.8" fill-opacity="0.08"/>
+<text x="314" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">关键节点</text>
+<line x1="438" y1="544" x2="476" y2="544" stroke="#5b726a" stroke-width="1.2" marker-end="url(#python-gui-chatroom-python-gui-chatroom-arrow)"/>
+<text x="488" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">调用 / 数据流</text>
+    </svg>

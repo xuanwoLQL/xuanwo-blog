@@ -1,0 +1,35 @@
+name: Build and verify
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.168.0"
+          extended: true
+
+      - name: Build
+        run: hugo --gc --minify --cleanDestinationDir --baseURL "http://localhost/"
+
+      - name: Check internal links
+        run: python scripts/check_links.py
+
+      - name: Check release quality
+        run: python scripts/quality_check.py

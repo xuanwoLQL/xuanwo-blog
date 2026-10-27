@@ -1,0 +1,76 @@
+{{- define "main" -}}
+{{- $projects := hugo.Data.projects.items -}}
+{{- $langs := slice -}}{{- $cats := slice -}}
+{{- range $projects }}{{ $langs = $langs | append .language }}{{ $cats = $cats | append .category }}{{ end -}}
+{{- $langs = uniq $langs -}}{{- $cats = uniq $cats -}}
+{{- $detailCount := 0 -}}
+{{- range $projects }}{{ if .detail }}{{ $detailCount = add $detailCount 1 }}{{ end }}{{ end -}}
+{{- $externalCount := sub (len $projects) $detailCount -}}
+
+<section class="page-hero projects-hero">
+    <div class="page-hero-glow" aria-hidden="true"></div>
+    <p class="eyebrow">PROJECTS / 开源与实验</p>
+    <h1>{{ .Title }}</h1>
+    <p class="page-hero-desc">{{ .Description }}</p>
+    <div class="page-hero-stats">
+        <span><strong>{{ len $projects }}</strong> 个公开项目</span>
+        <span><strong>{{ $detailCount }}</strong> 个站内详情</span>
+        <span><strong>{{ $externalCount }}</strong> 个 GitHub 外链</span>
+        <span><strong>{{ len $langs }}</strong> 种语言</span>
+        <a href="https://github.com/xuanwoLQL" target="_blank" rel="noopener">GitHub 主页 ↗</a>
+    </div>
+</section>
+
+<section class="projects-toolbar" aria-label="筛选项目">
+    <div class="notes-search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+        <input id="projects-search" type="search" placeholder="搜索项目、语言或技术栈…" autocomplete="off" aria-label="搜索项目">
+    </div>
+    <div class="filter-chips" role="group" aria-label="按方向筛选">
+        <button class="filter-chip active" type="button" data-filter="all">全部 <span>{{ len $projects }}</span></button>
+        {{- range $cats }}
+        <button class="filter-chip" type="button" data-filter="{{ . }}">{{ . }} <span>{{ len (where $projects "category" .) }}</span></button>
+        {{- end }}
+    </div>
+    <p class="notes-count" id="projects-count">共 {{ len $projects }} 个项目：{{ $detailCount }} 个可读站内详情，{{ $externalCount }} 个直达 GitHub</p>
+</section>
+
+<section class="projects-grid" id="projects-grid" aria-live="polite">
+    {{- range $projects }}
+    {{- $href := .url }}{{ $external := true }}
+    {{- with .detail }}{{ $href = . | relLangURL }}{{ $external = false }}{{ end }}
+    <article class="project-card spotlight" data-cat="{{ .category }}" data-search="{{ .name }} {{ .title }} {{ .description }} {{ delimit .tech " " }} {{ .language }}">
+        <a class="project-card-link" href="{{ $href }}" {{ if $external }}target="_blank" rel="noopener"{{ end }}>
+            <span class="project-watermark" aria-hidden="true">{{ substr .name 0 1 | upper }}</span>
+            <div class="project-card-top">
+                <span class="lang-dot" style="--dot: {{ .language_color }}"></span>
+                <span>{{ .category }}</span>
+                {{- if .featured }}<span class="project-badge">重点</span>{{ end }}
+                <span class="project-access {{ if $external }}external{{ else }}detail{{ end }}">{{ if $external }}GitHub{{ else }}站内详情{{ end }}</span>
+                <span class="project-arrow">{{ if $external }}↗{{ else }}→{{ end }}</span>
+            </div>
+            <h2>{{ .title }}</h2>
+            <p>{{ .description }}</p>
+            <div class="tech-chips">
+                {{- range first 4 .tech }}<span>{{ . }}</span>{{ end }}
+            </div>
+            <div class="project-card-foot">
+                <span>{{ .language }}</span>
+                <span>更新于 {{ .updated }}</span>
+            </div>
+        </a>
+    </article>
+    {{- end }}
+</section>
+
+<p class="notes-empty" id="projects-empty" hidden>没有找到匹配的项目。</p>
+
+<section class="projects-cta reveal">
+    <div>
+        <p class="eyebrow">MORE ON GITHUB</p>
+        <h2>还有更多在 GitHub 上</h2>
+        <p>课程实验、前端练习、脚本工具与正在折腾的项目，都会先出现在仓库里。</p>
+    </div>
+    <a class="btn btn-primary" href="https://github.com/xuanwoLQL" target="_blank" rel="noopener">打开 GitHub</a>
+</section>
+{{- end -}}

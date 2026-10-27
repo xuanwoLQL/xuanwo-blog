@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CTF 入门能力分层</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f6f2e9; color: #0c211c; font-family: 'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif; }
+    .frame { max-width: 1040px; margin: 0 auto; padding: 32px 24px; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    svg { width: 100%; min-width: 960px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame"><div class="diagram-container">
+    <svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="security-ctf-beginner-guide-title security-ctf-beginner-guide-desc">
+      <title id="security-ctf-beginner-guide-title">CTF 入门能力分层</title>
+      <desc id="security-ctf-beginner-guide-desc">从基础工具和协议，到 Web 漏洞、脚本能力、比赛复盘和长期方向。</desc>
+      
+<rect width="960" height="600" fill="#f6f2e9"/>
+
+<defs>
+  <marker id="security-ctf-beginner-guide-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#5b726a"/>
+  </marker>
+  <marker id="security-ctf-beginner-guide-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#0f766e"/>
+  </marker>
+  <marker id="security-ctf-beginner-guide-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#0369a1"/>
+  </marker>
+</defs>
+<text x="40" y="38" fill="#5b726a" font-size="8" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.16em">LAYER STACK</text>
+<text x="40" y="70" fill="#0c211c" font-size="26" font-family="'Noto Serif SC','Source Han Serif SC','Songti SC','SimSun',serif" text-anchor="start" font-weight="400">CTF 入门能力分层</text>
+<text x="40" y="94" fill="#5b726a" font-size="10" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">从基础工具和协议，到 Web 漏洞、脚本能力、比赛复盘和长期方向。</text>
+<line x1="40" y1="112" x2="920" y2="112" stroke="rgba(12,33,28,0.14)" stroke-width="0.8"/>
+      <rect x="88" y="150" width="800" height="62" rx="6" fill="#efe9dd" stroke="rgba(12,33,28,0.14)" stroke-width="1"/><text x="112" y="185" fill="#5b726a" font-size="9" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.10em">L5</text><text x="184" y="177" fill="#0c211c" font-size="14" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start" font-weight="600">赛道方向</text><text x="184" y="195" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">Web · Misc · Crypto · Reverse · Pwn</text><text x="864" y="185" fill="#5f736b" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="end">choose</text><rect x="88" y="224" width="800" height="62" rx="6" fill="#fffdf8" stroke="rgba(12,33,28,0.14)" stroke-width="1"/><text x="112" y="259" fill="#5b726a" font-size="9" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.10em">L4</text><text x="184" y="251" fill="#0c211c" font-size="14" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start" font-weight="600">比赛方法</text><text x="184" y="269" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">读题 · 分工 · 时间盒 · 复盘</text><text x="864" y="259" fill="#5f736b" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="end">practice</text><rect x="88" y="298" width="800" height="62" rx="6" fill="#efe9dd" stroke="rgba(12,33,28,0.14)" stroke-width="1"/><text x="112" y="333" fill="#5b726a" font-size="9" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.10em">L3</text><text x="184" y="325" fill="#0c211c" font-size="14" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start" font-weight="600">漏洞与算法</text><text x="184" y="343" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">OWASP · 密码学 · 逆向基础</text><text x="864" y="333" fill="#5f736b" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="end">core</text><rect x="88" y="372" width="800" height="62" rx="6" fill="#fffdf8" stroke="rgba(12,33,28,0.14)" stroke-width="1"/><text x="112" y="407" fill="#5b726a" font-size="9" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.10em">L2</text><text x="184" y="399" fill="#0c211c" font-size="14" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start" font-weight="600">编程与脚本</text><text x="184" y="417" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">Python · HTTP · Shell · 调试</text><text x="864" y="407" fill="#5f736b" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="end">automate</text><rect x="88" y="446" width="800" height="62" rx="6" fill="rgba(15,118,110,0.08)" stroke="#0f766e" stroke-width="1"/><text x="112" y="481" fill="#0f766e" font-size="9" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.10em">L1</text><text x="184" y="473" fill="#0c211c" font-size="14" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start" font-weight="600">系统与网络</text><text x="184" y="491" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">Linux · TCP/IP · Web 基础</text><text x="864" y="481" fill="#5f736b" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="end">foundation</text><line x1="56" y1="500" x2="56" y2="158" stroke="#5b726a" stroke-width="1.2" marker-end="url(#security-ctf-beginner-guide-arrow)"/><text x="42" y="136" fill="#5b726a" font-size="8" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.12em">UP</text>
+      
+<line x1="40" y1="532" x2="920" y2="532" stroke="rgba(12,33,28,0.14)" stroke-width="0.8"/>
+<text x="40" y="548" fill="#5b726a" font-size="8" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.16em">LEGEND</text>
+<rect x="122" y="538" width="28" height="12" rx="2" fill="#fffdf8" stroke="rgba(12,33,28,0.28)" stroke-width="0.8"/>
+<text x="158" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">层级</text>
+<rect x="278" y="538" width="28" height="12" rx="2" fill="rgba(15,118,110,0.08)" stroke="#0f766e" stroke-width="0.8"/>
+<text x="314" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">关键节点</text>
+<line x1="438" y1="544" x2="476" y2="544" stroke="#5b726a" stroke-width="1.2" marker-end="url(#security-ctf-beginner-guide-arrow)"/>
+<text x="488" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">抽象方向</text>
+    </svg>
+  </div></div>
+</body>
+</html>

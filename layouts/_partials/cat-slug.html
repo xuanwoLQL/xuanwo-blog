@@ -1,0 +1,14 @@
+{{- $name := . -}}
+{{- $slug := "all" -}}
+{{- if eq $name "CTF Writeup" }}{{ $slug = "ctf-writeup" }}
+{{- else if eq $name "Web 安全" }}{{ $slug = "web" }}
+{{- else if eq $name "渗透测试" }}{{ $slug = "pentest" }}
+{{- else if eq $name "密码学" }}{{ $slug = "crypto" }}
+{{- else if eq $name "网络编程" }}{{ $slug = "network" }}
+{{- else if eq $name "AI × 安全" }}{{ $slug = "ai" }}
+{{- else if eq $name "安全工具" }}{{ $slug = "tools" }}
+{{- else if eq $name "安全指南" }}{{ $slug = "guide" }}
+{{- else if eq $name "操作系统" }}{{ $slug = "os" }}
+{{- else if eq $name "建站日志" }}{{ $slug = "blog" }}
+{{- end -}}
+{{- $slug -}}

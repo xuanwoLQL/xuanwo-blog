@@ -61,7 +61,9 @@ server {
     add_header Referrer-Policy "strict-origin-when-cross-origin" always;
     add_header Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()" always;
     add_header Cross-Origin-Opener-Policy "same-origin" always;
-    add_header Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self';" always;
+    # Executable JavaScript is served from same-origin fingerprinted files.
+    # JSON-LD data blocks are not executable and do not require unsafe-inline.
+    add_header Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self' data:; connect-src 'self';" always;
 
     error_page 404 /404.html;
 
@@ -84,6 +86,16 @@ server {
         access_log off;
         log_not_found off;
         return 404;
+    }
+
+    # The blog intentionally publishes audited source bundles for its labs.
+    # Keep archive blocking everywhere else while allowing only GET/HEAD here.
+    location ^~ /code/ {
+        try_files $uri =404;
+        expires 1h;
+        limit_except GET HEAD {
+            deny all;
+        }
     }
 
     # Reduce noise from scanners looking for software not used by this site.

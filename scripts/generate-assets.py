@@ -23,8 +23,8 @@ def blend(a: tuple[int, int, int], b: tuple[int, int, int], t: float) -> tuple[i
 
 def radial_background(
     size: tuple[int, int],
-    inner: tuple[int, int, int] = (24, 63, 56),
-    outer: tuple[int, int, int] = (7, 17, 15),
+    inner: tuple[int, int, int] = (27, 43, 32),
+    outer: tuple[int, int, int] = (9, 12, 11),
     center: tuple[float, float] = (0.24, 0.16),
 ) -> Image.Image:
     width, height = size
@@ -61,15 +61,15 @@ def draw_swirl(canvas: Image.Image, center: tuple[float, float], radius: float, 
     glow_draw.line(spiral, fill=145, width=max(2, round(28 * scale)), joint="curve")
     glow = glow.filter(ImageFilter.GaussianBlur(max(3, round(22 * scale))))
 
-    teal_glow = Image.new("RGBA", canvas.size, (94, 234, 212, 0))
-    teal_glow.putalpha(glow)
-    overlay.alpha_composite(teal_glow)
+    accent_glow = Image.new("RGBA", canvas.size, (183, 227, 107, 0))
+    accent_glow.putalpha(glow)
+    overlay.alpha_composite(accent_glow)
 
     draw = ImageDraw.Draw(overlay)
     segment_count = len(spiral) - 1
     for index in range(segment_count):
         t = index / max(segment_count, 1)
-        color = blend((94, 234, 212), (232, 197, 71), t)
+        color = blend((183, 227, 107), (221, 188, 114), t)
         draw.line(
             (spiral[index], spiral[index + 1]),
             fill=(*color, 255),
@@ -86,7 +86,7 @@ def draw_swirl(canvas: Image.Image, center: tuple[float, float], radius: float, 
             center[0] + ring_radius,
             center[1] + ring_radius,
         )
-        ring_draw.ellipse(box, outline=(94, 234, 212, alpha), width=ring_width)
+        ring_draw.ellipse(box, outline=(183, 227, 107, alpha), width=ring_width)
 
     canvas.alpha_composite(overlay)
 
@@ -112,7 +112,7 @@ def make_profile() -> Image.Image:
             size * scale * 1.15,
             size * scale * 1.16,
         ),
-        fill=(232, 197, 71, 20),
+        fill=(221, 188, 114, 18),
     )
     highlight = highlight.filter(ImageFilter.GaussianBlur(60 * scale))
     canvas.alpha_composite(highlight)
@@ -132,7 +132,7 @@ def make_profile() -> Image.Image:
             size * scale * 0.73,
             size * scale * 0.31,
         ),
-        fill=(232, 197, 71, 255),
+        fill=(221, 188, 114, 255),
     )
 
     return canvas.convert("RGB").resize((size, size), Image.Resampling.LANCZOS)
@@ -143,8 +143,8 @@ def make_cover() -> Image.Image:
     scale = 2
     canvas = radial_background(
         (output_size[0] * scale, output_size[1] * scale),
-        inner=(22, 67, 59),
-        outer=(7, 17, 15),
+        inner=(27, 43, 32),
+        outer=(9, 12, 11),
         center=(0.76, 0.30),
     )
 
@@ -159,7 +159,7 @@ def make_cover() -> Image.Image:
     overlay_draw = ImageDraw.Draw(overlay)
     overlay_draw.rectangle(
         (0, 0, output_size[0] * scale * 0.58, output_size[1] * scale),
-        fill=(7, 17, 15, 58),
+        fill=(9, 12, 11, 62),
     )
     canvas.alpha_composite(overlay)
 
@@ -172,20 +172,20 @@ def make_cover() -> Image.Image:
     draw.rounded_rectangle(
         (left, 115 * scale, left + 12 * scale, 196 * scale),
         radius=6 * scale,
-        fill=(94, 234, 212, 255),
+        fill=(183, 227, 107, 255),
     )
-    draw.text((left + 38 * scale, 90 * scale), "漩涡", font=title_font, fill=(237, 247, 242, 255))
+    draw.text((left + 38 * scale, 90 * scale), "漩涡", font=title_font, fill=(238, 243, 239, 255))
     draw.text(
         (left + 38 * scale, 365 * scale),
         "记录代码、安全与思考",
         font=subtitle_font,
-        fill=(201, 216, 210, 255),
+        fill=(197, 208, 201, 255),
     )
     draw.text(
         (left + 38 * scale, 475 * scale),
         "xuanwo  ·  网络安全 / CTF / 漏洞复现",
         font=meta_font,
-        fill=(94, 234, 212, 255),
+        fill=(183, 227, 107, 255),
     )
 
     return canvas.convert("RGB").resize(output_size, Image.Resampling.LANCZOS)
@@ -200,7 +200,17 @@ def main() -> None:
     profile.resize((16, 16), Image.Resampling.LANCZOS).save(STATIC / "favicon-16x16.png", optimize=True)
     profile.resize((180, 180), Image.Resampling.LANCZOS).save(STATIC / "apple-touch-icon.png", optimize=True)
 
-    make_cover().save(IMAGES / "og-cover.png", optimize=True)
+    cover = make_cover().quantize(
+        colors=256,
+        method=Image.Quantize.MEDIANCUT,
+        dither=Image.Dither.FLOYDSTEINBERG,
+    )
+    cover.save(
+        IMAGES / "og-cover.png",
+        format="PNG",
+        optimize=True,
+        compress_level=9,
+    )
     print("Generated profile.png, favicons and og-cover.png")
 
 

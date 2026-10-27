@@ -4,9 +4,11 @@ resources/_gen/
 .hugo_build.lock
 __pycache__/
 *.pyc
+_shots/
 
 # Local deployment secrets
 .deploy.env
+scripts/private_redactions.txt
 
 # OS/editor files
 .DS_Store

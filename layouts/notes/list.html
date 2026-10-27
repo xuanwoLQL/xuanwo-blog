@@ -1,0 +1,67 @@
+{{- define "main" -}}
+{{- $notes := (where site.RegularPages "Section" "notes").ByDate.Reverse -}}
+{{- $collections := slice
+    (dict "name" "CTF Writeup" "slug" "ctf-writeup" "icon" "flag" "accent" "teal")
+    (dict "name" "Web 安全" "slug" "web" "icon" "bug" "accent" "gold")
+    (dict "name" "渗透测试" "slug" "pentest" "icon" "crosshair" "accent" "rose")
+    (dict "name" "密码学" "slug" "crypto" "icon" "key" "accent" "violet")
+    (dict "name" "网络编程" "slug" "network" "icon" "network" "accent" "blue")
+    (dict "name" "AI × 安全" "slug" "ai" "icon" "spark" "accent" "green")
+    (dict "name" "安全工具" "slug" "tools" "icon" "wrench" "accent" "gold")
+    (dict "name" "安全指南" "slug" "guide" "icon" "book" "accent" "teal")
+    (dict "name" "操作系统" "slug" "os" "icon" "cpu" "accent" "blue")
+-}}
+
+<section class="page-hero notes-hero">
+    <div class="page-hero-glow" aria-hidden="true"></div>
+    <p class="eyebrow">NOTES / 知识库</p>
+    <h1>{{ .Title }}</h1>
+    <p class="page-hero-desc">{{ .Description }}</p>
+    <div class="page-hero-stats">
+        <span><strong>{{ len $notes }}</strong> 篇笔记</span>
+        <span><strong>{{ len $collections }}</strong> 个专题</span>
+        <span><strong>{{ len (where $notes "Params.categories" "intersect" (slice "CTF Writeup")) }}</strong> 篇 Writeup</span>
+        <span>持续更新</span>
+    </div>
+</section>
+
+<section class="notes-toolbar" aria-label="筛选笔记">
+    <div class="notes-search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+        <input id="notes-search" type="search" placeholder="搜索标题、标签或描述…" autocomplete="off" aria-label="搜索笔记">
+        <kbd>/</kbd>
+    </div>
+    <div class="filter-chips" role="group" aria-label="按专题筛选">
+        <button class="filter-chip active" type="button" data-filter="all">全部 <span>{{ len $notes }}</span></button>
+        {{- range $collections }}
+        {{- $count := len (where $notes "Params.categories" "intersect" (slice .name)) }}
+        <button class="filter-chip" type="button" data-filter="{{ .slug }}">{{ .name }} <span>{{ $count }}</span></button>
+        {{- end }}
+    </div>
+    <p class="notes-count" id="notes-count">共 {{ len $notes }} 篇</p>
+</section>
+
+<section class="notes-grid" id="notes-grid" aria-live="polite">
+    {{- range $notes }}
+    {{- $cat := "all" }}{{ with .Params.categories }}{{ $cat = partial "cat-slug.html" (index . 0) }}{{ end }}
+    <article class="note-card spotlight" data-category="{{ $cat }}" data-search="{{ .Title }} {{ .Description }} {{ delimit .Params.tags " " }}">
+        <a class="note-card-link" href="{{ .RelPermalink }}">
+            <div class="note-card-top">
+                <span class="note-card-cat">{{ with .Params.categories }}{{ index . 0 }}{{ end }}</span>
+                <span class="note-card-read">{{ .ReadingTime }} min</span>
+            </div>
+            <h2>{{ .Title }}</h2>
+            <p>{{ .Description }}</p>
+            <div class="note-card-foot">
+                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time>
+                <span class="note-card-tags">{{ range first 2 .Params.tags }}#{{ . }} {{ end }}</span>
+                <span class="note-card-arrow">→</span>
+            </div>
+        </a>
+    </article>
+    {{- end }}
+</section>
+
+<p class="notes-empty" id="notes-empty" hidden>没有找到匹配的笔记，换个关键词试试。</p>
+
+{{- end -}}

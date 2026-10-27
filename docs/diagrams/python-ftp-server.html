@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FTP 控制面与数据面</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f6f2e9; color: #0c211c; font-family: 'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif; }
+    .frame { max-width: 1040px; margin: 0 auto; padding: 32px 24px; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    svg { width: 100%; min-width: 960px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame"><div class="diagram-container">
+    <svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="python-ftp-server-title python-ftp-server-desc">
+      <title id="python-ftp-server-title">FTP 控制面与数据面</title>
+      <desc id="python-ftp-server-desc">客户端命令走控制连接，文件内容走独立数据连接，服务器最终读写共享目录。</desc>
+      
+<rect width="960" height="600" fill="#f6f2e9"/>
+
+<defs>
+  <marker id="python-ftp-server-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#5b726a"/>
+  </marker>
+  <marker id="python-ftp-server-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#0f766e"/>
+  </marker>
+  <marker id="python-ftp-server-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#0369a1"/>
+  </marker>
+</defs>
+<text x="40" y="38" fill="#5b726a" font-size="8" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.16em">ARCHITECTURE</text>
+<text x="40" y="70" fill="#0c211c" font-size="26" font-family="'Noto Serif SC','Source Han Serif SC','Songti SC','SimSun',serif" text-anchor="start" font-weight="400">FTP 控制面与数据面</text>
+<text x="40" y="94" fill="#5b726a" font-size="10" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">客户端命令走控制连接，文件内容走独立数据连接，服务器最终读写共享目录。</text>
+<line x1="40" y1="112" x2="920" y2="112" stroke="rgba(12,33,28,0.14)" stroke-width="0.8"/>
+      <rect x="40" y="150" width="260" height="330" rx="8" fill="rgba(12,33,28,0.025)" stroke="rgba(12,33,28,0.14)" stroke-width="0.8"/><rect x="52" y="154" width="72" height="14" rx="2" fill="#f6f2e9"/><text x="88" y="164" fill="#5f736b" font-size="7.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.12em">CLIENT</text><rect x="350" y="150" width="260" height="330" rx="8" fill="rgba(12,33,28,0.025)" stroke="rgba(12,33,28,0.14)" stroke-width="0.8"/><rect x="362" y="154" width="72" height="14" rx="2" fill="#f6f2e9"/><text x="398" y="164" fill="#5f736b" font-size="7.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.12em">SERVER</text><rect x="660" y="150" width="260" height="330" rx="8" fill="rgba(12,33,28,0.025)" stroke="rgba(12,33,28,0.14)" stroke-width="0.8"/><rect x="672" y="154" width="72" height="14" rx="2" fill="#f6f2e9"/><text x="708" y="164" fill="#5f736b" font-size="7.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.12em">STORAGE</text>
+      <path d="M 273,226 H 376" fill="none" stroke="#0369a1" stroke-width="1.15" marker-end="url(#python-ftp-server-arrow-link)"/><path d="M 273,346 H 376" fill="none" stroke="#0369a1" stroke-width="1.15" marker-end="url(#python-ftp-server-arrow-link)"/><path d="M 583,226 H 686" fill="none" stroke="#5b726a" stroke-width="1.15" marker-end="url(#python-ftp-server-arrow)"/><path d="M 583,346 H 686" fill="none" stroke="#0f766e" stroke-width="1.15" marker-end="url(#python-ftp-server-arrow-accent)"/>
+      <rect x="70" y="190" width="200" height="72" rx="7" fill="#fffdf8" stroke="rgba(12,33,28,0.28)" stroke-width="1"/><rect x="78" y="197" width="49" height="12" rx="2" fill="transparent" stroke="rgba(12,33,28,0.28)" stroke-width="0.8"/><text x="102.5" y="206" fill="rgba(12,33,28,0.28)" font-size="6.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.06em">CONTROL</text><text x="170" y="230" fill="#0c211c" font-size="12.5" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">FTP 客户端</text><text x="170" y="246" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">USER / PASS / LIST / RETR</text><rect x="70" y="310" width="200" height="72" rx="7" fill="#fffdf8" stroke="rgba(12,33,28,0.28)" stroke-width="1"/><rect x="78" y="317" width="38" height="12" rx="2" fill="transparent" stroke="rgba(12,33,28,0.28)" stroke-width="0.8"/><text x="97" y="326" fill="rgba(12,33,28,0.28)" font-size="6.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.06em">DATA</text><text x="170" y="350" fill="#0c211c" font-size="12.5" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">数据连接</text><text x="170" y="366" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">PASV / PORT</text><rect x="380" y="190" width="200" height="72" rx="7" fill="#fffdf8" stroke="rgba(12,33,28,0.28)" stroke-width="1"/><rect x="388" y="197" width="49" height="12" rx="2" fill="transparent" stroke="rgba(12,33,28,0.28)" stroke-width="0.8"/><text x="412.5" y="206" fill="rgba(12,33,28,0.28)" font-size="6.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.06em">CONTROL</text><text x="480" y="230" fill="#0c211c" font-size="12.5" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">命令解析</text><text x="480" y="246" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">认证 / 状态机</text><rect x="380" y="310" width="200" height="72" rx="7" fill="rgba(15,118,110,0.08)" stroke="#0f766e" stroke-width="1"/><rect x="388" y="317" width="38" height="12" rx="2" fill="transparent" stroke="#0f766e" stroke-width="0.8"/><text x="407" y="326" fill="#0f766e" font-size="6.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.06em">DATA</text><text x="480" y="350" fill="#0c211c" font-size="12.5" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">数据通道</text><text x="480" y="366" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">LIST / RETR / STOR</text><rect x="690" y="190" width="200" height="72" rx="7" fill="#fffdf8" stroke="rgba(12,33,28,0.28)" stroke-width="1"/><rect x="698" y="197" width="38" height="12" rx="2" fill="transparent" stroke="rgba(12,33,28,0.28)" stroke-width="0.8"/><text x="717" y="206" fill="rgba(12,33,28,0.28)" font-size="6.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.06em">FILES</text><text x="790" y="230" fill="#0c211c" font-size="12.5" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">目录列表</text><text x="790" y="246" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">共享根目录</text><rect x="690" y="310" width="200" height="72" rx="7" fill="#fffdf8" stroke="rgba(12,33,28,0.28)" stroke-width="1"/><rect x="698" y="317" width="38" height="12" rx="2" fill="transparent" stroke="rgba(12,33,28,0.28)" stroke-width="0.8"/><text x="717" y="326" fill="rgba(12,33,28,0.28)" font-size="6.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.06em">FILES</text><text x="790" y="350" fill="#0c211c" font-size="12.5" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">文件读写</text><text x="790" y="366" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">分块发送 / 落地</text>
+      
+<line x1="40" y1="532" x2="920" y2="532" stroke="rgba(12,33,28,0.14)" stroke-width="0.8"/>
+<text x="40" y="548" fill="#5b726a" font-size="8" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.16em">LEGEND</text>
+<rect x="122" y="538" width="28" height="12" rx="2" fill="#fffdf8" stroke="rgba(12,33,28,0.28)" stroke-width="0.8"/>
+<text x="158" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">组件</text>
+<rect x="278" y="538" width="28" height="12" rx="2" fill="rgba(15,118,110,0.08)" stroke="#0f766e" stroke-width="0.8"/>
+<text x="314" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">关键节点</text>
+<line x1="438" y1="544" x2="476" y2="544" stroke="#5b726a" stroke-width="1.2" marker-end="url(#python-ftp-server-arrow)"/>
+<text x="488" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">调用 / 数据流</text>
+    </svg>
+  </div></div>
+</body>
+</html>

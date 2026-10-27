@@ -1,0 +1,3 @@
+# Copy this file to private_redactions.txt. The real file is ignored by Git.
+# Each non-comment line is a Python regular expression replaced with [已脱敏].
+# Add personal names, student IDs, schools or lab-specific identifiers here.

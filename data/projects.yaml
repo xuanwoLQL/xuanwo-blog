@@ -1,0 +1,209 @@
+# 公开项目清单
+# 说明：OpenHarmony 笔记不在博客收录范围；xuanwo 仓库以项目卡片形式列出。
+items:
+  - name: security-notes
+    title: 网络安全学习笔记
+    tagline: CTF Writeup 与 Web 安全知识库
+    description: 19 篇 CTF Writeup、25 篇 Web 安全笔记、3 篇内网靶场实战，覆盖文件上传、反序列化、SSRF、SQL 注入、fastjson 与内网横向。
+    language: Markdown
+    language_color: "#5eead4"
+    category: 安全
+    accent: teal
+    url: https://github.com/xuanwoLQL/security-notes
+    detail: /projects/security-notes/
+    featured: true
+    span: large
+    updated: "2026-10-21"
+    tech: [CTF, Web 安全, 内网渗透, Obsidian]
+  - name: bugku-pentest-writeup
+    title: Bugku 渗透测试 3
+    tagline: 8/8 FLAG 的完整攻击链
+    description: 从 SSRF 任意文件读取打点，经 PHP-FPM 未授权 FastCGI 拿到 RCE，再横向 5 台容器，最终用 SQL 注入、CMS 漏洞与 XXE 收尾。
+    language: Markdown
+    language_color: "#5eead4"
+    category: 渗透
+    accent: gold
+    url: https://github.com/xuanwoLQL/bugku-pentest-writeup
+    detail: /projects/bugku-pentest-writeup/
+    featured: true
+    span: large
+    updated: "2026-10-08"
+    tech: [SSRF, FastCGI, 内网横向, XXE]
+  - name: codex-computer-use
+    title: Codex Computer Use
+    tagline: 让 AI 读屏并操控键鼠
+    description: 用 UIA 无障碍树与 Windows OCR 把屏幕变成文字，再用 PowerShell 模块完成点击与输入，形成「看到 → 点到 → 输入」闭环。
+    language: PowerShell
+    language_color: "#5aa7ff"
+    category: AI 工具
+    accent: violet
+    url: https://github.com/xuanwoLQL/codex-computer-use
+    detail: /projects/codex-computer-use/
+    featured: true
+    span: small
+    updated: "2026-10-09"
+    tech: [PowerShell, UIA, OCR, Computer Use]
+  - name: tcp-file-service
+    title: TCP 网盘
+    tagline: 手写应用层协议的网盘
+    description: Python 标准库实现的多人网盘，JSON 控制面 + 裸字节数据面，支持 SHA-256 密码存储、8KB 分块传输与断点续传。
+    language: Python
+    language_color: "#3572A5"
+    category: 网络
+    accent: blue
+    url: https://github.com/xuanwoLQL/tcp-file-service
+    detail: /projects/tcp-file-service/
+    featured: true
+    span: small
+    updated: "2026-10-08"
+    tech: [Socket, 多线程, 断点续传, 协议设计]
+  - name: xuanwo-blog
+    title: 漩涡博客
+    tagline: 你正在浏览的站点
+    description: Hugo + PaperMod + Nginx 的静态安全博客，自定义个人档案首页、专题入口、Bento 项目墙、笔记检索与文章阅读体验。
+    language: HTML
+    language_color: "#e34c26"
+    category: 本站
+    accent: teal
+    url: https://github.com/xuanwoLQL/xuanwo-blog
+    detail: /projects/xuanwo-blog/
+    featured: true
+    span: small
+    updated: "2026-10-26"
+    tech: [Hugo, PaperMod, Nginx, 自建主题]
+  - name: des-cipher-lab
+    title: DES 纯 C 实现
+    tagline: 从置换表开始写密码算法
+    description: 不依赖第三方库，按 FIPS 46-3 实现 16 轮 Feistel、PKCS#7 填充与 ECB 模式，并用 NIST 标准向量做交叉验证。
+    language: C
+    language_color: "#8b949e"
+    category: 密码学
+    accent: gold
+    url: https://github.com/xuanwoLQL/des-cipher-lab
+    detail: /projects/des-cipher-lab/
+    featured: true
+    span: small
+    updated: "2026-10-08"
+    tech: [C, DES, PKCS#7, NIST]
+  - name: xuanwo
+    title: OpenHarmony AI 漏洞挖掘工具
+    tagline: Patch Diffing + ASAN 验证闭环
+    description: 双模式架构（编程 / 安全）、Patch Diffing Nday 自动挖掘、ASAN 验证闭环、Ink 交互式 TUI 与自包含单文件发布。
+    language: TypeScript
+    language_color: "#3178c6"
+    category: 安全
+    accent: violet
+    url: https://github.com/xuanwoLQL/xuanwo
+    featured: false
+    updated: "2026-10-08"
+    tech: [TypeScript, Patch Diffing, ASAN, TUI]
+  - name: affine-cipher-lab
+    title: 仿射密码破译
+    tagline: 312 组密钥暴力枚举
+    description: 纯 C 实现仿射密码加解密、字母映射表、全密钥空间枚举与卡方统计频率分析破译。
+    language: Python
+    language_color: "#3572A5"
+    category: 密码学
+    accent: gold
+    url: https://github.com/xuanwoLQL/affine-cipher-lab
+    updated: "2026-10-08"
+    tech: [C, 仿射密码, 频率分析]
+  - name: TodayToDo
+    title: TodayToDo
+    tagline: 贴边隐藏的悬浮任务助手
+    description: PyQt6 桌面任务管理工具，鼠标移入展开、系统托盘、全局热键、深色模式与多显示器支持，数据存本地 JSON。
+    language: Python
+    language_color: "#3572A5"
+    category: 桌面
+    accent: violet
+    url: https://github.com/xuanwoLQL/TodayToDo
+    updated: "2026-10-08"
+    tech: [PyQt6, 系统托盘, 全局热键]
+  - name: blind-box-travel
+    title: 四季盲盒旅行
+    tagline: 零构建的品牌落地页
+    description: 纯 HTML / CSS / JS 的旅行盲盒页面，包含开场 splash、季节自动高亮、价格分类、今日推荐、热聊区与客服弹窗。
+    language: CSS
+    language_color: "#563d7c"
+    category: Web
+    accent: rose
+    url: https://github.com/xuanwoLQL/blind-box-travel
+    updated: "2026-10-08"
+    tech: [HTML, CSS, JavaScript, 响应式]
+  - name: data-structure-labs
+    title: 数据结构实验合集
+    tagline: 10 个实验 + 1 个课程设计
+    description: C++ 手写线性表、栈队列、二叉树、哈夫曼树、图遍历、最小生成树、拓扑排序、关键路径与查找排序，全部编译运行验证。
+    language: C++
+    language_color: "#f34b7d"
+    category: 课程
+    accent: blue
+    url: https://github.com/xuanwoLQL/data-structure-labs
+    updated: "2026-10-08"
+    tech: [C++, 数据结构, 算法]
+  - name: study-notes
+    title: 操作系统与数据库笔记
+    tagline: 内核架构与进程管理实验
+    description: 宏内核 / 微内核对比笔记，fork、wait、僵尸进程等 8 个 C 程序实验，以及数据库考试复习笔记。
+    language: C
+    language_color: "#8b949e"
+    category: 课程
+    accent: teal
+    url: https://github.com/xuanwoLQL/study-notes
+    updated: "2026-10-08"
+    tech: [操作系统, 数据库, C]
+  - name: car-rental
+    title: 汽车租赁系统
+    tagline: Java 面向对象实验
+    description: 抽象类 MotoVehicle 派生 Car / Bus，多态计价，Customer 结算租金，javac 编译运行验证通过。
+    language: Java
+    language_color: "#b07219"
+    category: 课程
+    accent: rose
+    url: https://github.com/xuanwoLQL/car-rental
+    updated: "2026-10-08"
+    tech: [Java, OOP, 多态]
+  - name: router-demo-setup
+    title: Vue Router 全示例
+    tagline: 路由知识点的可运行演示
+    description: Vue 3 + TypeScript + Vite，覆盖动态路由、嵌套路由、编程式导航、路由守卫、懒加载与 404 兜底。
+    language: Vue
+    language_color: "#41b883"
+    category: Web
+    accent: green
+    url: https://github.com/xuanwoLQL/router-demo-setup
+    updated: "2026-10-08"
+    tech: [Vue 3, TypeScript, Vite, Vue Router]
+  - name: login-register-setup
+    title: 登录注册系统
+    tagline: 前端鉴权的最小闭环
+    description: Vue 3 + TypeScript + Vite，axios 拦截器、MSW 网络层 mock、token 存储与路由守卫，配套完整代码解释。
+    language: JavaScript
+    language_color: "#f1e05a"
+    category: Web
+    accent: blue
+    url: https://github.com/xuanwoLQL/login-register-setup
+    updated: "2026-10-08"
+    tech: [Vue 3, axios, MSW, 路由守卫]
+  - name: heart-animation
+    title: Canvas 粒子爱心
+    tagline: 单文件、零依赖的动画
+    description: HTML5 Canvas 粒子爱心，基于心形参数方程与 5 色粒子向心扩散，双击 index.html 即可运行。
+    language: HTML
+    language_color: "#e34c26"
+    category: Web
+    accent: rose
+    url: https://github.com/xuanwoLQL/heart-animation
+    updated: "2026-10-08"
+    tech: [Canvas, 粒子动画, 零依赖]
+  - name: xuanwoLQL
+    title: GitHub 主页
+    tagline: 所有公开仓库的入口
+    description: 个人主页 README，汇总安全笔记、CTF Writeup、课程实验与前端项目。
+    language: Markdown
+    language_color: "#5eead4"
+    category: 主页
+    accent: teal
+    url: https://github.com/xuanwoLQL
+    updated: "2026-10-08"
+    tech: [GitHub, README]

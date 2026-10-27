@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="python-socketserver-lab-title python-socketserver-lab-desc" id="python-socketserver-lab-root">
+      <title id="python-socketserver-lab-title">socketserver 并发模型</title>
+      <desc id="python-socketserver-lab-desc">请求处理器负责协议逻辑，服务器类负责监听和并发调度，存储层负责文件读写。</desc>
+      
+<rect width="960" height="600" fill="#f6f2e9"/>
+
+<defs>
+      <style>#python-socketserver-lab-root { color: #0c211c; font-family: 'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif; }
+      #python-socketserver-lab-root .diagram-container { width: 100%; overflow-x: auto; }</style>
+  <marker id="python-socketserver-lab-python-socketserver-lab-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#5b726a"/>
+  </marker>
+  <marker id="python-socketserver-lab-python-socketserver-lab-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#0f766e"/>
+  </marker>
+  <marker id="python-socketserver-lab-python-socketserver-lab-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#0369a1"/>
+  </marker>
+</defs>
+<text x="40" y="38" fill="#5b726a" font-size="8" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.16em">ARCHITECTURE</text>
+<text x="40" y="70" fill="#0c211c" font-size="26" font-family="'Noto Serif SC','Source Han Serif SC','Songti SC','SimSun',serif" text-anchor="start" font-weight="400">socketserver 并发模型</text>
+<text x="40" y="94" fill="#5b726a" font-size="10" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">请求处理器负责协议逻辑，服务器类负责监听和并发调度，存储层负责文件读写。</text>
+<line x1="40" y1="112" x2="920" y2="112" stroke="#0c211c" stroke-width="0.8" stroke-opacity="0.14"/>
+      <rect x="40" y="150" width="260" height="330" rx="8" fill="#0c211c" stroke="#0c211c" stroke-width="0.8" fill-opacity="0.025" stroke-opacity="0.14"/><rect x="52" y="154" width="72" height="14" rx="2" fill="#f6f2e9"/><text x="88" y="164" fill="#5f736b" font-size="7.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.12em">CLIENTS</text><rect x="350" y="150" width="260" height="330" rx="8" fill="#0c211c" stroke="#0c211c" stroke-width="0.8" fill-opacity="0.025" stroke-opacity="0.14"/><rect x="362" y="154" width="72" height="14" rx="2" fill="#f6f2e9"/><text x="398" y="164" fill="#5f736b" font-size="7.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.12em">SERVER</text><rect x="660" y="150" width="260" height="330" rx="8" fill="#0c211c" stroke="#0c211c" stroke-width="0.8" fill-opacity="0.025" stroke-opacity="0.14"/><rect x="672" y="154" width="72" height="14" rx="2" fill="#f6f2e9"/><text x="708" y="164" fill="#5f736b" font-size="7.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.12em">STORAGE</text>
+      <path d="M 273,286 H 376" fill="none" stroke="#0369a1" stroke-width="1.15" marker-end="url(#python-socketserver-lab-python-socketserver-lab-arrow-link)"/><path d="M 583,286 H 686" fill="none" stroke="#0f766e" stroke-width="1.15" marker-end="url(#python-socketserver-lab-python-socketserver-lab-arrow-accent)"/>
+      <rect x="70" y="250" width="200" height="72" rx="7" fill="#fffdf8" stroke="#0c211c" stroke-width="1" stroke-opacity="0.28"/><rect x="78" y="257" width="38" height="12" rx="2" fill="none" stroke="#0c211c" stroke-width="0.8" stroke-opacity="0.28"/><text x="97" y="266" fill="#0c211c" font-size="6.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.06em" fill-opacity="0.28">TCP</text><text x="170" y="290" fill="#0c211c" font-size="12.5" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">多个客户端</text><text x="170" y="306" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">并发请求</text><rect x="380" y="250" width="200" height="72" rx="7" fill="#0f766e" stroke="#0f766e" stroke-width="1" fill-opacity="0.08"/><rect x="388" y="257" width="49" height="12" rx="2" fill="none" stroke="#0f766e" stroke-width="0.8"/><text x="412.5" y="266" fill="#0f766e" font-size="6.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.06em">HANDLER</text><text x="480" y="290" fill="#0c211c" font-size="12.5" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">Server + Handler</text><text x="480" y="306" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">并发调度 / 协议解析</text><rect x="690" y="250" width="200" height="72" rx="7" fill="#fffdf8" stroke="#0c211c" stroke-width="1" stroke-opacity="0.28"/><rect x="698" y="257" width="38" height="12" rx="2" fill="none" stroke="#0c211c" stroke-width="0.8" stroke-opacity="0.28"/><text x="717" y="266" fill="#0c211c" font-size="6.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle" letter-spacing="0.06em" fill-opacity="0.28">FILES</text><text x="790" y="290" fill="#0c211c" font-size="12.5" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="middle" font-weight="600">文件目录</text><text x="790" y="306" fill="#5b726a" font-size="8.5" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="middle">read / write / list</text>
+      
+<line x1="40" y1="532" x2="920" y2="532" stroke="#0c211c" stroke-width="0.8" stroke-opacity="0.14"/>
+<text x="40" y="548" fill="#5b726a" font-size="8" font-family="'Cascadia Mono','Cascadia Code','Consolas','Liberation Mono',monospace" text-anchor="start" letter-spacing="0.16em">LEGEND</text>
+<rect x="122" y="538" width="28" height="12" rx="2" fill="#fffdf8" stroke="#0c211c" stroke-width="0.8" stroke-opacity="0.28"/>
+<text x="158" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">组件</text>
+<rect x="278" y="538" width="28" height="12" rx="2" fill="#0f766e" stroke="#0f766e" stroke-width="0.8" fill-opacity="0.08"/>
+<text x="314" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">关键节点</text>
+<line x1="438" y1="544" x2="476" y2="544" stroke="#5b726a" stroke-width="1.2" marker-end="url(#python-socketserver-lab-python-socketserver-lab-arrow)"/>
+<text x="488" y="548" fill="#5b726a" font-size="9" font-family="'MiSans','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif" text-anchor="start">调用 / 数据流</text>
+    </svg>

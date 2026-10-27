@@ -1,0 +1,141 @@
+{{- define "main" -}}
+{{- $toc := .TableOfContents -}}
+{{- $showToc := and .Params.ShowToc (gt (len $toc) 80) -}}
+<div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+
+<article class="article{{ if not $showToc }} article--no-toc{{ end }}">
+    <div class="article-frame">
+    <header class="article-header">
+        {{- if not (eq .Params.ShowBreadCrumbs false) }}
+        <nav class="crumbs" aria-label="面包屑">
+            <a href="{{ "" | relLangURL }}">首页</a>
+            {{- with .Section }}
+            <span>/</span>
+            <a href="{{ printf "%s/" . | relLangURL }}">{{ if eq . "notes" }}笔记{{ else if eq . "projects" }}项目{{ else if eq . "posts" }}文章{{ else }}{{ . }}{{ end }}</a>
+            {{- end }}
+            <span>/</span>
+            <span class="crumbs-current">{{ .Title }}</span>
+        </nav>
+        {{- end }}
+
+        <div class="article-kicker">
+            {{- with .Params.categories }}
+            <a class="article-cat" href="{{ "notes/" | relLangURL }}?cat={{ partial "cat-slug.html" (index . 0) }}">{{ index . 0 }}</a>
+            {{- end }}
+            {{- if .Params.series }}
+            {{- $seriesName := index .Params.series 0 }}
+            {{- $showSeries := true }}
+            {{- with .Params.categories }}{{ if eq (index . 0) $seriesName }}{{ $showSeries = false }}{{ end }}{{ end }}
+            {{- if $showSeries }}
+            {{- with $.GetTerms "series" }}{{ $term := index . 0 }}<a class="article-series" href="{{ $term.RelPermalink }}">{{ $term.LinkTitle }}</a>{{ end }}
+            {{- end }}
+            {{- end }}
+        </div>
+
+        <h1 class="article-title">{{ .Title }}</h1>
+        {{- with .Description }}<p class="article-desc">{{ . }}</p>{{ end }}
+
+        {{- if not .Params.hidemeta }}
+        <div class="article-meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006年01月02日" }}</time>
+            <span class="meta-dot"></span>
+            <span>{{ .ReadingTime }} 分钟阅读</span>
+            <span class="meta-dot"></span>
+            <span>{{ .WordCount }} 字</span>
+            {{- if ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02") }}
+            <span class="meta-dot"></span>
+            <span>更新于 {{ .Lastmod.Format "2006-01-02" }}</span>
+            {{- end }}
+        </div>
+        {{- end }}
+    </header>
+
+    <div class="article-layout">
+        <div class="article-body post-content md-content">
+            {{- partial "anchored_headings.html" .Content -}}
+        </div>
+
+        {{- if $showToc }}
+        <aside class="article-toc" aria-label="文章目录">
+            <div class="toc-panel">
+                <div class="toc-head"><span>目录</span><em>CONTENTS</em><button class="toc-toggle" type="button" aria-expanded="false">展开</button></div>
+                {{ $toc }}
+                <a class="toc-top" href="#top">回到顶部 <span>↑</span></a>
+            </div>
+        </aside>
+        {{- end }}
+    </div>
+
+    <footer class="article-footer">
+        {{- with .GetTerms "tags" }}
+        <div class="article-tags">
+            <span class="tags-label">标签</span>
+            {{- range . }}<a href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>{{ end }}
+        </div>
+        {{- end }}
+
+        {{- with .Params.source_repo }}
+        <a class="source-link" href="{{ . }}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"></path><path d="M10 14 21 3"></path><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path></svg>
+            在 GitHub 查看源笔记
+        </a>
+        {{- end }}
+
+        {{- with .Params.series }}
+        {{- $seriesName := index . 0 }}
+        {{- $seriesPages := where site.RegularPages "Params.series" "intersect" (slice $seriesName) }}
+        {{- $seriesPages = $seriesPages.ByWeight }}
+        {{- $current := $.RelPermalink }}
+        {{- $prev := false }}{{ $next := false }}{{ $found := false }}
+        {{- range $seriesPages }}
+            {{- if $found }}
+                {{- if not $next }}{{ $next = . }}{{ end }}
+            {{- else if eq .RelPermalink $current }}
+                {{- $found = true }}
+            {{- else }}
+                {{- $prev = . }}
+            {{- end }}
+        {{- end }}
+        {{- if or $prev $next }}
+        <nav class="series-nav" aria-label="系列导航">
+            <div class="series-label">系列 · {{ $seriesName }}</div>
+            <div class="series-links">
+                {{- if $prev }}
+                <a class="series-link prev" href="{{ $prev.RelPermalink }}">
+                    <span class="series-dir">← 上一篇</span>
+                    <span class="series-title">{{ $prev.Title }}</span>
+                </a>
+                {{- end }}
+                {{- if $next }}
+                <a class="series-link next" href="{{ $next.RelPermalink }}">
+                    <span class="series-dir">下一篇 →</span>
+                    <span class="series-title">{{ $next.Title }}</span>
+                </a>
+                {{- end }}
+            </div>
+        </nav>
+        {{- end }}
+        {{- end }}
+
+        {{- $related := where (where site.RegularPages "Section" "notes") "Params.tags" "intersect" .Params.tags }}
+        {{- $others := slice }}
+        {{- range $related }}{{ if ne .RelPermalink $.RelPermalink }}{{ $others = $others | append . }}{{ end }}{{ end }}
+        {{- $others = first 3 $others }}
+        {{- if $others }}
+        <section class="related">
+            <h2 class="related-title">继续阅读</h2>
+            <div class="related-grid">
+                {{- range $others }}
+                <a class="related-card" href="{{ .RelPermalink }}">
+                    <span class="related-cat">{{ with .Params.categories }}{{ index . 0 }}{{ end }}</span>
+                    <h3>{{ .Title }}</h3>
+                    <span class="related-meta">{{ .Date.Format "2006.01.02" }} · {{ .ReadingTime }} 分钟</span>
+                </a>
+                {{- end }}
+            </div>
+        </section>
+        {{- end }}
+    </footer>
+    </div>
+</article>
+{{- end -}}

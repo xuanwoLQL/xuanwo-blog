@@ -1,0 +1,331 @@
+/* ==========================================================================
+   漩涡 · header & footer
+   ========================================================================== */
+
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 120;
+    height: var(--header-h);
+    background: var(--header-bg);
+    border-bottom: 1px solid transparent;
+    -webkit-backdrop-filter: blur(16px) saturate(125%);
+    backdrop-filter: blur(16px) saturate(125%);
+    transition: height 260ms cubic-bezier(0.22, 1, 0.36, 1), border-color 260ms ease, background 260ms ease;
+}
+
+.site-header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: var(--line);
+    opacity: 0;
+    transition: opacity 260ms ease;
+}
+
+.site-header.is-scrolled {
+    height: 62px;
+}
+
+.site-header.is-scrolled::after {
+    opacity: 1;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    width: min(var(--wrap), calc(100% - 48px));
+    height: 100%;
+    margin: 0 auto;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    flex: none;
+    color: var(--ink);
+}
+
+.brand:hover {
+    color: var(--ink);
+}
+
+.vortex-mark {
+    width: 34px;
+    height: 34px;
+    color: var(--accent);
+    transition: transform 320ms ease, color 160ms ease;
+}
+
+.brand:hover .vortex-mark {
+    transform: rotate(-12deg);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.brand-cn {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+}
+
+.brand-en {
+    margin-top: 4px;
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--faint);
+}
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    flex: 1;
+}
+
+.nav-link {
+    position: relative;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--muted);
+    transition: color 160ms ease, background 160ms ease;
+}
+
+.nav-link:hover {
+    color: var(--ink);
+    background: var(--surface-2);
+}
+
+.nav-link.active {
+    color: var(--accent);
+}
+
+.nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 2px;
+    width: 16px;
+    height: 1px;
+    margin-left: -8px;
+    border-radius: 0;
+    background: var(--accent);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex: none;
+}
+
+.icon-btn {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    color: var(--muted);
+    background: transparent;
+    cursor: pointer;
+    transition: color 160ms ease, background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.icon-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.icon-btn:hover {
+    color: var(--accent);
+    background: var(--surface-2);
+    border-color: var(--line);
+}
+
+.theme-toggle:hover {
+    transform: rotate(8deg);
+}
+
+:root[data-theme="dark"] .icon-sun {
+    display: none;
+}
+
+:root[data-theme="light"] .icon-moon {
+    display: none;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 17px;
+    height: 1.5px;
+    margin: 3.5px auto;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform 240ms ease, opacity 200ms ease;
+}
+
+body.nav-open .menu-toggle span:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+}
+
+body.nav-open .menu-toggle span:nth-child(2) {
+    opacity: 0;
+}
+
+body.nav-open .menu-toggle span:nth-child(3) {
+    transform: translateY(-5px) rotate(-45deg);
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.site-footer {
+    position: relative;
+    flex-shrink: 0;
+    margin-top: 0;
+    padding: 64px 0 24px;
+    border-top: 1px solid var(--line);
+    background: var(--bg-2);
+}
+
+.footer-inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 48px;
+    width: min(var(--wrap), calc(100% - 48px));
+    margin: 0 auto;
+}
+
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.footer-logo em {
+    margin-left: 4px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-style: normal;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--faint);
+}
+
+.footer-logo .vortex-mark {
+    width: 32px;
+    height: 32px;
+}
+
+.footer-brand > p {
+    max-width: 26em;
+    margin: 18px 0 22px;
+    font-size: 13.5px;
+    line-height: 1.8;
+    color: var(--muted);
+}
+
+.footer-social {
+    display: flex;
+    gap: 8px;
+}
+
+.footer-social a {
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--muted);
+    background: var(--surface);
+}
+
+.footer-social a:hover {
+    color: var(--accent);
+    border-color: var(--line-strong);
+}
+
+.footer-col h3 {
+    margin-bottom: 16px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--faint);
+}
+
+.footer-col a {
+    display: block;
+    padding: 5px 0;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.footer-col a:hover {
+    color: var(--accent);
+    transform: translateX(3px);
+}
+
+.footer-note {
+    margin: 0 0 12px;
+    font-size: 12px;
+    line-height: 1.75;
+    color: var(--faint);
+}
+
+.footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: min(var(--wrap), calc(100% - 48px));
+    margin: 46px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--faint);
+}
+
+.footer-bottom a {
+    color: var(--faint);
+}
+
+.footer-bottom a:hover {
+    color: var(--accent);
+}
+
+.footer-rss {
+    color: var(--muted);
+}
