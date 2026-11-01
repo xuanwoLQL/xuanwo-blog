@@ -40,6 +40,9 @@ comments: false
 
 ## 快速开始
 
+- [Windows 便携版](https://github.com/xuanwoLQL/bumimang-ctf-workbench/releases/download/v0.1.0/bumimang-0.1.0-portable.exe)
+- [Windows 安装版](https://github.com/xuanwoLQL/bumimang-ctf-workbench/releases/download/v0.1.0/bumimang-0.1.0-setup.exe)
+
 ```powershell
 git clone https://github.com/xuanwoLQL/bumimang-ctf-workbench.git
 cd bumimang-ctf-workbench
