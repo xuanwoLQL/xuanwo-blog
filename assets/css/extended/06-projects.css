@@ -93,6 +93,13 @@
   line-height: 1.75;
 }
 
+/* PaperMod ships `word-break: keep-all` on tables, so CJK cells refuse to
+   wrap and narrow project columns get a horizontal scrollbar. */
+.project-body table {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
 .project-side {
   position: sticky;
   top: calc(var(--header-h) + var(--space-lg));
