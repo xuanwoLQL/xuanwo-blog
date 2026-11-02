@@ -220,6 +220,18 @@ RTX 3050 Laptop，`--reps 3000`（单策略 133~313 ms 跑完）：
 
 界面上还能一键重跑实验、对比两份明细、导出报告素材包。`/results_img` 这类读本地磁盘的接口做了白名单目录 + 图片扩展名双闸，`../`、绝对路径、非图片一律 404，测试里有 7 个目录穿越反例。
 
+## 图表与图册
+
+![系统分层架构图：现场线程 → 调度内核 → 评测与呈现](/images/projects/uav-sched-sim/architecture.png)
+
+除了页面里的截图，仓库里还有两套完整素材：
+
+| 目录 | 内容 | 怎么用 |
+| --- | --- | --- |
+| `docs/charts/` | 10 张结果图快照：吞吐 / 时延 / 饥饿 / 利用率 / 完整率 / 队列 / 链路 / 天气 / 站级 MEC / 多站矩阵 | GitHub 上直接看；重跑 `run.py all/weather/stations` 会重新生成 |
+| `docs/diagrams/` | 8 张系统图册（HTML/SVG）：系统框架、数据流、任务状态机、权重决策、调度时序、部署拓扑、数据库 ER、评测流水线 | 下载后用浏览器打开，带统一导航与打印样式 |
+| `docs/redesign-preview/` | 图册的 PNG 版本（`diagram-01~08.png`） | 写报告 / 做 PPT 时直接拖进去 |
+
 ## 真实数据：采集 → 录制 → 回放
 
 天气线用 Open-Meteo（免费免 key）采集一次快照，之后离线回放，不把小时级气象伪造成秒级动态。
@@ -266,6 +278,8 @@ python -m venv .venv
 .venv/Scripts/python app.py
 ```
 
+不想装 Python 的话，直接下 Windows 单文件版：[UavSchedulerSim v1.0.0](https://github.com/xuanwoLQL/uav-sched-sim/releases/download/v1.0.0/UavSchedulerSim-v1.0.0-win64.exe)（13.9 MB，双击运行，支持 `--stations triple --mec`）。
+
 想看更多维度：`run.py weather`（20 组）、`run.py stations`（18 组）、`run.py mec`（12 组）、`run.py replicate --reps 10`、`run.py gpu --reps 3000`。
 
 ## 诚实的边界
@@ -281,6 +295,8 @@ python -m venv .venv
 ## 相关链接
 
 - 仓库：<https://github.com/xuanwoLQL/uav-sched-sim>
+- 结果图：<https://github.com/xuanwoLQL/uav-sched-sim/tree/main/docs/charts>
+- 系统图册：<https://github.com/xuanwoLQL/uav-sched-sim/tree/main/docs/diagrams>
 - 设计说明书：`docs/01-设计方案说明书.md`（含 15 组真实结果与指标口径批判）
 - 四层映射：`docs/04-四层映射对照表.md`
 - 多基站与 MEC：`docs/11-多基站与MEC边缘计算.md`
