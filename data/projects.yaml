@@ -29,6 +29,20 @@ items:
     span: large
     updated: "2026-10-21"
     tech: [CTF, Web 安全, 内网渗透, Obsidian]
+  - name: uav-sched-sim
+    title: 无人机集群自适应调度仿真系统
+    tagline: 30 架无人机 · 6 种策略 · 一份可复现的 OS 实验
+    description: 把矿区无人机集群的上传拥堵、任务饥饿、峰值过载与弱网失衡，下沉为线程调度、多级队列、动态权重与并发限流；3 工况 × 5 策略对照实验，另加跨节点均衡与 MEC 边缘计算。
+    language: Python
+    language_color: "#3572A5"
+    category: 课程
+    accent: green
+    url: https://github.com/xuanwoLQL/uav-sched-sim
+    detail: /projects/uav-sched-sim/
+    featured: true
+    span: large
+    updated: "2026-11-02"
+    tech: [Python, 多线程, MLFQ, 动态权重, CUDA]
   - name: bugku-pentest-writeup
     title: Bugku 渗透测试 3
     tagline: 8/8 FLAG 的完整攻击链
@@ -81,7 +95,7 @@ items:
     accent: teal
     url: https://github.com/xuanwoLQL/xuanwo-blog
     detail: /projects/xuanwo-blog/
-    featured: true
+    featured: false
     span: small
     updated: "2026-10-26"
     tech: [Hugo, PaperMod, Nginx, 自建主题]

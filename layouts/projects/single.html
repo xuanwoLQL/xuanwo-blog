@@ -24,7 +24,7 @@
                     {{- with $category }}<span class="article-cat">{{ . }}</span>{{ end }}
                     {{- if $language }}<span class="project-lang">{{ $language }}</span>{{ end }}
                 </div>
-                <h1>{{ .Title }}</h1>
+                <h1{{ if .Params.titleLines }} class="project-title-multi"{{ end }}>{{ if .Params.titleLines }}{{ delimit .Params.titleLines "<br>" | safeHTML }}{{ else }}{{ .Title }}{{ end }}</h1>
                 <p class="article-desc">{{ .Description }}</p>
                 <div class="tech-chips">
                     {{- range $tech }}<span>{{ . }}</span>{{ end }}

@@ -556,6 +556,12 @@
     font-size: clamp(3rem, 16vw, 5rem);
   }
 
+  /* Titles split into explicit lines need a slightly smaller size
+     so the longest line still fits the phone column. */
+  .project-hero h1.project-title-multi {
+    font-size: clamp(2.2rem, 10vw, 5rem);
+  }
+
   .project-actions .btn {
     width: 100%;
   }

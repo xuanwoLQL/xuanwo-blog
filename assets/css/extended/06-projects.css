@@ -38,6 +38,7 @@
   font-weight: 400;
   line-height: 0.86;
   letter-spacing: var(--tracking-display);
+  text-wrap: balance;
 }
 
 .project-hero .article-desc {
@@ -54,6 +55,18 @@
   flex-wrap: wrap;
   gap: var(--space-sm);
   margin-top: var(--space-xl);
+}
+
+/* Keep "查看仓库" on one line; the flex row can wrap instead of squeezing. */
+.project-actions .btn {
+  flex: none;
+  white-space: nowrap;
+}
+
+.project-actions .btn svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
 }
 
 .project-hero-visual {
