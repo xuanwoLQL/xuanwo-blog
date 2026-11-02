@@ -27,7 +27,7 @@
 | 部署 | tar + scp，独立 release 目录原子切换，保留上一版 |
 | HTTPS | 等待域名与 ICP 备案，本次未处理 |
 
-> 2026-10-27 完成面试评审修复、首页信息架构重排并重新部署；旧站保留在 `/var/www/blog-old-*`，可人工回滚。
+> 2026-11-02 完成面试官视角改版、首页内容重组并重新部署；旧站保留在 `/var/www/blog-old-*`，可人工回滚。
 
 ## 内容来源与边界
 
@@ -136,8 +136,9 @@ python -m http.server 1313 --directory public --bind 127.0.0.1
 
 截图在 [`docs/previews/`](docs/previews/)：
 
-- [首页 · 深色](docs/previews/home-desktop.png)
+- [首页 · 桌面](docs/previews/home-desktop.png)
 - [首页 · 浅色](docs/previews/home-light.png)
+- [首页 · 深色](docs/previews/home-dark.png)
 - [首页 · 移动端](docs/previews/home-mobile.png)
 - [笔记库 · 浅色](docs/previews/notes-desktop.png)
 - [项目墙](docs/previews/projects-desktop.png)

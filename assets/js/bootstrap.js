@@ -14,7 +14,7 @@
 
     var queryTheme = /[?&]theme=(light|dark)/.exec(window.location.search);
     if (queryTheme) preference = queryTheme[1];
-    root.dataset.theme = preference === 'light' ? 'light' : 'dark';
+    root.dataset.theme = preference === 'dark' ? 'dark' : 'light';
 
     window.setTimeout(function () {
         if (window.__vortexReady) return;

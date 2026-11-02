@@ -5,6 +5,8 @@ resources/_gen/
 __pycache__/
 *.pyc
 _shots/
+.hallmark/
+layouts/.hallmark/
 
 # Local deployment secrets
 .deploy.env

@@ -1,140 +1,170 @@
-/* ==========================================================================
-   漩涡 · design tokens
-   ========================================================================== */
+/* Hallmark · shape: Long Document · genre: editorial · theme: Broadside (deal 2/3, seed personal-security-blog-ctf-c55d·afa9c498·2026-11-02·r0) · redesign: full
+ * hero: Stage (/) · Banner (lists, documents) · nav: edge-aligned · footer: colophon block · imagery: none, the profile ledger is the visual · signature: XUANWO masthead over a profile ledger · broadside: bill, draw 9f21b2
+ * axes: light/display-condensed/warm · posture: committed · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P5 H4 E5 S5 R5 V4 · weakest: H, the hero index and the records list could compete; the hero list is capped at four rows and the records become a ruled table below the fold */
+/* Hallmark · waive 44c · the profile ledger is the hero visual and ends inside the 900px fold · list and document pages use Banner mastheads */
+/* Hallmark · waive 79 · the profile ledger reaches the fold · document pages begin their body or first diagram inside it */
+/* Hallmark · waive 77 · the four-figure ledger is the mass of its band · index and document pages carry rows and prose */
+/* Hallmark · waive 59 · the stats ledger, search tools and ruled project index form one dense bill · the continuous index is intentionally tighter than a marketing section gap */
+/* Hallmark · dismissed 58 · the 81-word screen is the first two owner-written project records */
+/* Hallmark · reworded "我是 xuanwo，在实战里学习安全。" to "XUANWO / 在实战里学习安全。" · 54 and 58 set a name and one line */
+/* Hallmark · reworded "2026：竞赛、演习与能力认证" to "比赛、演练与认证" · 19 refuses the colon title */
+/* Hallmark · reworded "京津冀信息安全网络攻防赛" to "京津冀大学生信息安全网络攻防赛" · 19 uses the fuller record name */
+/* Hallmark · reworded "按专题研读" to "按专题阅读" · 54 removes the label voice */
+/* Hallmark · reworded "最近写下的东西" to "最近更新" · 58 tightens the head */
+/* Hallmark · reworded "把想法做成能跑的东西" to "公开项目" · 58 tightens the head */
+/* Hallmark · reworded "导航" to "站内" · 42 names the footer destination */
+/* Hallmark · dismissed 23 · committed posture: the single vermilion close band is the page's declared field */
+/* Hallmark · dismissed 41 · code blocks set --color-code-ink on --color-code; --color-ink is only the page text */
+
+@font-face {
+  font-family: "Six Caps";
+  src: url("/fonts/six-caps-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Bevan";
+  src: url("/fonts/bevan-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Archivo Narrow";
+  src: url("/fonts/archivo-narrow-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 :root {
-    --header-h: 72px;
-    --wrap: 1160px;
-    --article-w: 760px;
-    --toc-w: 240px;
-    --gap: 24px;
-    --radius-sm: 6px;
-    --radius: 12px;
-    --radius-lg: 18px;
+  color-scheme: light;
 
-    --font-sans: "MiSans", "HarmonyOS Sans SC", "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei", system-ui, -apple-system, "Segoe UI", sans-serif;
-    --font-display: "Bahnschrift", "MiSans", "HarmonyOS Sans SC", "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei UI", sans-serif;
-    --font-mono: "JetBrains Mono", "Cascadia Code", "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-    --font-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
+  --space-3xs: 2px;
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+  --space-4xl: 144px;
 
-    --bg: #090c0b;
-    --bg-2: #0d1110;
-    --surface: rgba(18, 24, 21, 0.88);
-    --surface-2: rgba(24, 32, 28, 0.72);
-    --surface-solid: #111714;
-    --ink: #eef3ef;
-    --ink-soft: #c5d0c9;
-    --muted: #8c9a92;
-    --faint: #66736c;
+  --text-xs: 0.8125rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5625rem;
+  --text-2xl: 1.953rem;
+  --text-3xl: 2.441rem;
+  --text-display-s: clamp(2.5rem, 4vw + 0.75rem, 4rem);
+  --text-display: clamp(3.5rem, 7vw + 0.5rem, 7.5rem);
+  --text-section: clamp(2rem, 2.5vw + 1rem, 3.5rem);
+  --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem);
+  --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
 
-    --accent: #b7e36b;
-    --accent-2: #ddbc72;
-    --accent-3: #78b7d4;
-    --accent-4: #bea8dc;
-    --rose: #df929e;
-    --green: #78c997;
-    --accent-contrast: #11170d;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
 
-    --line: rgba(218, 232, 222, 0.12);
-    --line-strong: rgba(183, 227, 107, 0.3);
-    --glow: rgba(183, 227, 107, 0.12);
-    --gold-glow: rgba(221, 188, 114, 0.09);
-    --grid-line: rgba(218, 232, 222, 0.035);
+  --color-paper: oklch(92% 0.028 88);
+  --color-paper-2: oklch(88.5% 0.032 88);
+  --color-paper-3: oklch(85% 0.036 86);
+  --color-ink: oklch(18% 0.01 50);
+  --color-ink-2: oklch(30% 0.012 50);
+  --color-muted: oklch(43% 0.02 62);
+  --color-rule: oklch(75% 0.028 82);
+  --color-accent: oklch(45% 0.19 33);
+  --color-accent-ink: oklch(95.5% 0.018 88);
+  --color-focus: oklch(45% 0.19 33);
+  --color-error: oklch(52% 0.19 27);
+  --color-success: oklch(50% 0.12 150);
+  --color-code: oklch(18% 0.01 50);
+  --color-code-ink: oklch(95.5% 0.018 88);
 
-    --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.18);
-    --shadow: 0 22px 64px rgba(0, 0, 0, 0.32);
-    --shadow-lg: 0 36px 100px rgba(0, 0, 0, 0.42);
-    --header-bg: rgba(9, 12, 11, 0.86);
-    --code-bg: #0b100e;
-    --selection: #b7e36b;
-    --selection-ink: #11170d;
+  --font-display: "Six Caps", sans-serif;
+  --font-display-2: "Bevan", Georgia, serif;
+  --font-body: "Archivo Narrow", sans-serif;
+  --font-code: var(--font-body);
 
-    /* PaperMod bridge */
-    --theme: var(--bg);
-    --entry: var(--surface-solid);
-    --primary: var(--ink);
-    --secondary: var(--muted);
-    --tertiary: var(--line);
-    --content: var(--ink-soft);
-    --border: var(--line);
-    --code-block-bg: var(--code-bg);
-    --nav-width: 1200px;
-    --main-width: 760px;
-    --content-gap: 22px;
+  --radius-card: 0;
+  --radius-pill: 0;
+  --rule-hair: 1px;
+  --rule-bar: 5px;
+  --rule-frame: 3px;
+  --shadow-card: none;
+  --tracking-display: 0.02em;
+  --display-weight: 400;
+  --grain: 0.06;
 
-    color-scheme: dark;
+  --header-h: 72px;
+  --container: 1440px;
+  --gutter: 64px;
+  --gap-columns: 32px;
+  --section-gap-s: 120px;
+  --section-gap: 144px;
+  --section-gap-l: 176px;
+  --article-w: 760px;
+  --toc-w: 240px;
+  --control-h: 48px;
+
+  --z-base: 1;
+  --z-raised: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-sticky-nav: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-tooltip: 600;
+
+  --theme: var(--color-paper);
+  --entry: var(--color-paper-2);
+  --primary: var(--color-ink);
+  --secondary: var(--color-muted);
+  --tertiary: var(--color-rule);
+  --content: var(--color-ink-2);
+  --border: var(--color-rule);
+  --code-bg: var(--color-code);
+  --code-block-bg: var(--color-code);
+  --nav-width: var(--container);
+  --main-width: var(--article-w);
+  --content-gap: var(--space-lg);
 }
 
-:root[data-theme="light"] {
-    --bg: #f5f2e9;
-    --bg-2: #ece8dc;
-    --surface: rgba(255, 254, 249, 0.9);
-    --surface-2: rgba(255, 255, 255, 0.72);
-    --surface-solid: #fffef9;
-    --ink: #14201a;
-    --ink-soft: #34473e;
-    --muted: #65766d;
-    --faint: #7f8e86;
-
-    --accent: #3f6b2c;
-    --accent-2: #865b12;
-    --accent-3: #1f6688;
-    --accent-4: #6c4d8d;
-    --rose: #a33e51;
-    --green: #28724a;
-    --accent-contrast: #ffffff;
-
-    --line: rgba(20, 32, 26, 0.12);
-    --line-strong: rgba(63, 107, 44, 0.32);
-    --glow: rgba(63, 107, 44, 0.08);
-    --gold-glow: rgba(134, 91, 18, 0.07);
-    --grid-line: rgba(20, 32, 26, 0.04);
-
-    --shadow-sm: 0 6px 20px rgba(20, 32, 26, 0.05);
-    --shadow: 0 22px 60px rgba(20, 32, 26, 0.09);
-    --shadow-lg: 0 36px 100px rgba(20, 32, 26, 0.12);
-    --header-bg: rgba(245, 242, 233, 0.9);
-    --code-bg: #0b100e;
-    --selection: #3f6b2c;
-    --selection-ink: #ffffff;
-
-    --theme: var(--bg);
-    --entry: var(--surface-solid);
-    --primary: var(--ink);
-    --secondary: var(--muted);
-    --tertiary: var(--line);
-    --content: var(--ink-soft);
-    --border: var(--line);
-    --code-block-bg: var(--code-bg);
-
-    color-scheme: light;
-}
-
-[data-accent="teal"] { --card-accent: var(--accent); }
-[data-accent="gold"] { --card-accent: var(--accent-2); }
-[data-accent="violet"] { --card-accent: var(--accent-4); }
-[data-accent="blue"] { --card-accent: var(--accent-3); }
-[data-accent="rose"] { --card-accent: var(--rose); }
-[data-accent="green"] { --card-accent: var(--green); }
-
-/* PaperMod's dark theme sets higher-specificity variables; keep them aligned
-   with the custom palette so code blocks and theme components do not drift. */
 :root[data-theme="dark"] {
-    --theme: var(--bg);
-    --entry: var(--surface-solid);
-    --primary: var(--ink);
-    --secondary: var(--muted);
-    --tertiary: var(--line);
-    --content: var(--ink-soft);
-    --border: var(--line);
-    --code-bg: #0b100e;
-    --code-block-bg: #0b100e;
-}
+  color-scheme: dark;
 
-:root[data-theme="light"] .hero::before {
-    opacity: 0.45;
-}
+  --color-paper: oklch(17% 0.01 60);
+  --color-paper-2: oklch(20% 0.012 60);
+  --color-paper-3: oklch(24% 0.014 60);
+  --color-ink: oklch(92% 0.028 88);
+  --color-ink-2: oklch(80% 0.024 82);
+  --color-muted: oklch(66% 0.022 70);
+  --color-rule: oklch(36% 0.018 62);
+  --color-accent: oklch(63% 0.19 33);
+  --color-accent-ink: oklch(17% 0.01 60);
+  --color-focus: oklch(63% 0.19 33);
+  --color-code: oklch(92% 0.028 88);
+  --color-code-ink: oklch(17% 0.01 60);
 
-:root[data-theme="light"] .page-hero-glow {
-    opacity: 0.55;
+  --theme: var(--color-paper);
+  --entry: var(--color-paper-2);
+  --primary: var(--color-ink);
+  --secondary: var(--color-muted);
+  --tertiary: var(--color-rule);
+  --content: var(--color-ink-2);
+  --border: var(--color-rule);
+  --code-bg: var(--color-code);
+  --code-block-bg: var(--color-code);
 }

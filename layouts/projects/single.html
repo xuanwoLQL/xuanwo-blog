@@ -13,7 +13,6 @@
 
 <article class="project-single" data-accent="{{ $accent }}">
     <header class="project-hero">
-        <div class="project-hero-glow" aria-hidden="true"></div>
         <nav class="crumbs" aria-label="面包屑">
             <a href="{{ "" | relLangURL }}">首页</a><span>/</span>
             <a href="{{ "projects/" | relLangURL }}">项目</a><span>/</span>
@@ -23,7 +22,7 @@
             <div class="project-hero-copy">
                 <div class="project-kicker">
                     {{- with $category }}<span class="article-cat">{{ . }}</span>{{ end }}
-                    {{- if $language }}<span class="project-lang"><i style="--dot: {{ index $project "language_color" | default "var(--accent)" }}"></i>{{ $language }}</span>{{ end }}
+                    {{- if $language }}<span class="project-lang">{{ $language }}</span>{{ end }}
                 </div>
                 <h1>{{ .Title }}</h1>
                 <p class="article-desc">{{ .Description }}</p>
@@ -37,13 +36,8 @@
                         查看仓库
                     </a>
                     {{- end }}
-                    <a class="btn btn-ghost" href="{{ "projects/" | relLangURL }}">返回项目</a>
+                    <a class="btn btn-frame" href="{{ "projects/" | relLangURL }}">返回项目</a>
                 </div>
-            </div>
-            <div class="project-hero-visual" aria-hidden="true">
-                <span class="project-hero-mark">{{ substr $slug 0 1 | upper }}</span>
-                <span class="project-orbit orbit-1"></span>
-                <span class="project-orbit orbit-2"></span>
             </div>
         </div>
     </header>
@@ -56,10 +50,10 @@
             <div class="project-side-card">
                 <h2>项目信息</h2>
                 <dl>
-                    {{- with $language }}<div><dt>语言</dt><dd><i style="--dot: {{ index $project "language_color" | default "var(--accent)" }}"></i>{{ . }}</dd></div>{{ end }}
+                    {{- with $language }}<div><dt>语言</dt><dd>{{ . }}</dd></div>{{ end }}
                     {{- with $category }}<div><dt>方向</dt><dd>{{ . }}</dd></div>{{ end }}
                     {{- with $updated }}<div><dt>更新</dt><dd>{{ . }}</dd></div>{{ end }}
-                    {{- with $repo }}<div><dt>仓库</dt><dd><a href="{{ . }}" target="_blank" rel="noopener">GitHub ↗</a></dd></div>{{ end }}
+                    {{- with $repo }}<div><dt>仓库</dt><dd><a href="{{ . }}" target="_blank" rel="noopener">GitHub</a></dd></div>{{ end }}
                 </dl>
                 {{- with $tech }}
                 <div class="project-side-tags">

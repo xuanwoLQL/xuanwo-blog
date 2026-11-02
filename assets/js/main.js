@@ -462,7 +462,7 @@
                 var scrolled = -rect.top + window.innerHeight * 0.28;
                 var p = total > 0 ? scrolled / total : 0;
                 p = Math.max(0, Math.min(1, p));
-                bar.style.width = (p * 100).toFixed(2) + '%';
+                bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
                 ticking = false;
             });
         }

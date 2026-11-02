@@ -1,0 +1,11 @@
+{{- define "main" -}}
+<header class="page-header search-header">
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}<p class="post-description">{{ . }}</p>{{ end }}
+</header>
+
+<div id="searchbox" class="searchbox">
+    <input id="searchInput" type="search" disabled placeholder="{{ .Params.placeholder | default "输入标题、标签或关键词" }}" aria-label="搜索文章" autocomplete="off" maxlength="64">
+    <ul id="searchResults" class="searchResults" aria-label="搜索结果"></ul>
+</div>
+{{- end -}}

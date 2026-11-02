@@ -93,7 +93,7 @@ params:
     - posts
 
   # 默认深色主题，同时保留右上角明暗切换。
-  defaultTheme: dark
+  defaultTheme: light
   # 关闭 PaperMod 自带的内联主题脚本；本站由 assets/js/bootstrap.js 完成首屏主题初始化。
   disableThemeToggle: true
 
