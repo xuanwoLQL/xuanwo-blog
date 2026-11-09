@@ -156,3 +156,7 @@ npm start
 - [源码仓库](https://github.com/xuanwoLQL/multiagent-workbench)
 
 安装包当前未签名，Windows SmartScreen 可能提示「未知发布者」；下载后建议先校验 Release 页面提供的 SHA256，再运行。
+
+## 许可证
+
+本项目采用 [MIT License](https://github.com/xuanwoLQL/multiagent-workbench/blob/main/LICENSE)。
