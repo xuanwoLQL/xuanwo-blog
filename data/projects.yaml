@@ -1,6 +1,20 @@
 # 公开项目清单
 # 说明：OpenHarmony 笔记不在博客收录范围；xuanwo 仓库以项目卡片形式列出。
 items:
+  - name: multiagent-workbench
+    title: MultiAgent 协作工作台
+    tagline: 多 Agent 任务编排 · Git worktree 隔离 · 合并审阅
+    description: Windows 原生多 Agent 协作工作台：任务 DAG、worktree 隔离、先审后合、冲突/缺失分支终态、进程审计与 Electron 桌面打包。
+    language: Python / TypeScript
+    language_color: "#3178c6"
+    category: AI 工具
+    accent: gold
+    url: https://github.com/xuanwoLQL/multiagent-workbench
+    detail: /projects/multiagent-workbench/
+    featured: true
+    span: large
+    updated: "2026-11-09"
+    tech: [Electron, FastAPI, React, SQLite, Git worktree]
   - name: bumimang-ctf-workbench
     title: 不迷茫多 Agent 解题平台
     tagline: 四 Agent 并行 · 共享黑板 · 证据驱动提交

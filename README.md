@@ -7,7 +7,7 @@
 
 - **个人档案首页**：首屏直接呈现方向、近期竞赛、企业实践与公开产出
 - **阅读路径**：先看笔记专题，再看最近更新，降低首次访问者的选择成本
-- **Bento 项目墙**：19 个公开项目，按方向筛选，明确区分 8 个站内详情与 11 个 GitHub 外链
+- **Bento 项目墙**：20 个公开项目，按方向筛选，明确区分 9 个站内详情与 11 个 GitHub 外链
 - **笔记库**：61 篇笔记，9 个专题，支持即时搜索与分类筛选
 - **阅读体验**：阅读进度、粘性目录、代码复制、系列上下篇、相关笔记、图片灯箱
 - **复现质量**：61 篇笔记均配流程图 / 架构图 / 数据流图，代码与命令按步骤展开
@@ -37,7 +37,7 @@
 - **本地密码学实验**：仿射密码、DES、RSA、MD5（已移除姓名、学号、院校、教师信息）
 - **本地操作系统笔记**：宏内核 / 微内核
 - **Agent Skills 工程记录**：CTF、应急响应、MCP 边界与验收
-- **GitHub 公开仓库**：19 个项目，来自 GitHub API（`data/projects.yaml`）
+- **GitHub 公开仓库**：20 个项目，来自 GitHub API（`data/projects.yaml`）
 
 ### 暂不收录
 
@@ -75,9 +75,9 @@
 │  ├─ categories/_index.md
 │  ├─ series/_index.md
 │  ├─ notes/                       # 61 篇笔记 + _index.md
-│  ├─ projects/                    # 8 个重点项目详情 + _index.md
+│  ├─ projects/                    # 9 个重点项目详情 + _index.md
 │  └─ posts/hello-xuanwo.md        # 建站首文
-├─ data/projects.yaml              # 19 个公开项目卡片数据
+├─ data/projects.yaml              # 20 个公开项目卡片数据
 ├─ layouts/
 │  ├─ index.html                   # 个人档案与内容入口首页
 │  ├─ _default/single.html         # 文章页（目录 / 系列 / 相关）
@@ -205,7 +205,7 @@ TocOpen: false
 
 ## 更新项目墙
 
-`data/projects.yaml` 是项目卡片的数据源（19 个公开项目，8 个重点详情页，11 个 GitHub 外链）。字段：
+`data/projects.yaml` 是项目卡片的数据源（20 个公开项目，9 个重点详情页，11 个 GitHub 外链）。字段：
 
 ```yaml
 - name: repo-name
